@@ -1,5 +1,7 @@
 # API 키. 절대 커밋 금지
-.env
+# .env.bak, .env.local 등 파생 파일까지 전부 막고 양식 파일만 예외로 둔다
+.env*
+!.env.example
 
 # 생성물 — 렌더된 PNG와 MP4
 out/
