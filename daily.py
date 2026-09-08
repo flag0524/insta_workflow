@@ -59,14 +59,14 @@ def save_state(state):
 
 # ---------- 1. 오늘자 항목 선택 ----------
 
-def pick_post(plan, state, force_day=None):
+def pick_post(plan, state, force_day=None, now=None):
     if force_day:
         for p in plan["posts"]:
             if p["day"] == force_day:
                 return p
         raise SystemExit(f"day {force_day} 없음")
 
-    now = dt.datetime.now(KST)
+    now = now or dt.datetime.now(KST)
     for p in plan["posts"]:
         if p["date"] != now.date().isoformat():
             continue
