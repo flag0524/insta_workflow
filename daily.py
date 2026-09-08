@@ -31,7 +31,11 @@ load_dotenv(ROOT / ".env")
 # ---------- 공통 ----------
 
 def log(msg):
-    print(f"[{dt.datetime.now(KST):%Y-%m-%d %H:%M:%S}] {msg}", flush=True)
+    """스케줄러로 실행되면 표준출력이 사라지므로 파일에도 남긴다."""
+    line = f"[{dt.datetime.now(KST):%Y-%m-%d %H:%M:%S}] {msg}"
+    print(line, flush=True)
+    with open(ROOT / "daily.log", "a", encoding="utf-8") as f:
+        f.write(line + "\n")
 
 
 def notify(msg):
