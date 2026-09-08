@@ -102,11 +102,12 @@ Windows 작업 스케줄러 (매일 07:15 / 09:45 / 20:15 — 3회 트리거)
 
 | 항목 | 내용 |
 |---|---|
-| 인스타 계정 | 프로페셔널(비즈니스/크리에이터) 전환 필수 |
-| 페이스북 페이지 | 인스타 계정과 연결 필수 |
-| Meta 앱 | developers.facebook.com에서 생성 |
-| 권한 | `instagram_basic`, `instagram_content_publish`, `pages_read_engagement`, `pages_show_list` |
-| 액세스 토큰 | 장기 토큰(60일 만료) |
+| 인스타 계정 | 프로페셔널(비즈니스/크리에이터) 전환 필수 — 현재 `@flag_21` / MEDIA_CREATOR |
+| API 계열 | **Instagram API with Instagram Login** (`graph.instagram.com`). 페이스북 페이지 연결이 **불필요**합니다 |
+| 페이스북 페이지 | 불필요. (페이스북 로그인 방식을 쓴다면 `graph.facebook.com`으로 바꾸고 페이지 연결이 필요합니다) |
+| 권한 | `instagram_business_basic`, `instagram_business_content_publish` — 확인 완료 |
+| 액세스 토큰 | 장기 토큰(60일 만료). `python daily.py --check-env`가 실제로 호출해 검증합니다 |
+| IG_USER_ID | 사용자명이 아니라 **숫자 ID**입니다 (`28152757404390183`) |
 | Cloudinary | 무료 계정 (월 25GB 대역폭) |
 | ffmpeg | PATH 등록 필요 |
 | python 경로 | 스케줄러에는 **시스템 python 절대 경로**를 등록합니다. PATH의 `python`이 다른 가상환경을 가리킬 수 있고, 그러면 스케줄러 실행만 ImportError로 실패합니다 |

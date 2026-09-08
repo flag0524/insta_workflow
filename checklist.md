@@ -10,17 +10,16 @@
 - [x] `validate.py` → 통과 (30건 / 747초 / 에러 0)
 - [x] 트렌딩 오디오 하이브리드 여부 결정 → **미도입, 전량 자동**
 
-## 1. 계정·API 준비 (사용자 수동 — **남은 유일한 병목**)
+## 1. 계정·API 준비
 
-- [ ] 인스타 계정을 프로페셔널로 전환
-- [ ] 페이스북 페이지 생성 후 인스타 계정과 연결
-- [ ] developers.facebook.com에서 Meta 앱 생성
-- [ ] 권한 요청 — `instagram_basic`, `instagram_content_publish`, `pages_read_engagement`, `pages_show_list`
-- [ ] 장기 액세스 토큰 발급 (60일)
-- [ ] IG User ID 확인
-- [ ] Cloudinary 무료 계정 + API 키
+- [x] 인스타 계정 프로페셔널 전환 — `@flag_21` / MEDIA_CREATOR / 게시물 12개
+- [x] API 계열 확정 — **Instagram Login** (`graph.instagram.com`). 페이스북 페이지 연결 불필요
+- [x] 액세스 토큰 확보 → verify: `--check-env`의 토큰 검증 OK
+- [x] 게시 권한 확인 → `content_publishing_limit` 조회 성공 (0/100 사용)
+- [x] IG User ID 확인 → `28152757404390183` (사용자명이 아니라 숫자 ID)
+- [ ] **Cloudinary 무료 계정 + API 키 3개** ← **남은 유일한 병목**
 - [ ] 텔레그램 봇 토큰 + chat_id (선택이지만 권장 — 없으면 실패를 `daily.log`로만 알 수 있음)
-- [ ] `.env.example`을 `.env`로 복사해 값 입력 → verify: `python daily.py --check-env`가 "통과" 출력
+- [ ] verify: `python daily.py --check-env`가 "통과" 출력
 
 ## 2. 로컬 환경 (완료)
 

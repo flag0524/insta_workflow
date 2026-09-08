@@ -23,7 +23,9 @@ KST = dt.timezone(dt.timedelta(hours=9))
 W, H, FPS = 1080, 1920, 30
 XFADE = 0.25          # 장면 전환 시간
 WINDOW_MIN = 45       # publish_at 기준 실행 허용 창
-GRAPH = "https://graph.facebook.com/v21.0"
+# Instagram API with Instagram Login 계열. 페이스북 페이지 연결이 필요 없고 크리에이터 계정에서 동작한다.
+# 페이스북 로그인 방식(graph.facebook.com)을 쓰는 토큰이라면 이 값을 바꿔야 한다.
+GRAPH = "https://graph.instagram.com/v21.0"
 
 load_dotenv(ROOT / ".env")
 
@@ -286,6 +288,24 @@ def check_env():
             print(f"{k}: OK")
         else:
             print(f"{k}: MISSING — .env에 추가하세요")
+            ok = False
+
+    # 키가 있어도 토큰이 만료됐을 수 있다. 실제로 한 번 호출해 확인한다
+    if os.getenv("IG_ACCESS_TOKEN") and os.getenv("IG_USER_ID"):
+        try:
+            r = requests.get(
+                f"{GRAPH}/{os.environ['IG_USER_ID']}",
+                params={"fields": "username,account_type", "access_token": os.environ["IG_ACCESS_TOKEN"]},
+                timeout=20,
+            )
+            if r.status_code == 200:
+                d = r.json()
+                print(f"토큰 검증: OK — @{d.get('username')} ({d.get('account_type')})")
+            else:
+                print(f"토큰 검증: 실패 HTTP {r.status_code} — {r.json().get('error', {}).get('message')}")
+                ok = False
+        except Exception as e:
+            print(f"토큰 검증: 호출 실패 {type(e).__name__}")
             ok = False
 
     if not TEMPLATE.exists():
