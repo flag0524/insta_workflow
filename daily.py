@@ -308,6 +308,23 @@ def check_env():
             print(f"토큰 검증: 호출 실패 {type(e).__name__}")
             ok = False
 
+    # 값이 채워져 있어도 대시보드의 가려진 표시(****)를 복사했을 수 있다. 실제로 인증해 본다
+    if all(os.getenv(k) for k in ("CLOUDINARY_CLOUD_NAME", "CLOUDINARY_API_KEY", "CLOUDINARY_API_SECRET")):
+        try:
+            import cloudinary
+            import cloudinary.api
+
+            cloudinary.config(
+                cloud_name=os.environ["CLOUDINARY_CLOUD_NAME"],
+                api_key=os.environ["CLOUDINARY_API_KEY"],
+                api_secret=os.environ["CLOUDINARY_API_SECRET"],
+            )
+            cloudinary.api.ping()
+            print("Cloudinary 인증: OK")
+        except Exception as e:
+            print(f"Cloudinary 인증: 실패 — {str(e)[:120]}")
+            ok = False
+
     if not TEMPLATE.exists():
         print(f"{TEMPLATE.name}: MISSING")
         ok = False
