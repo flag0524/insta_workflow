@@ -29,10 +29,9 @@
       (PATH의 `python`은 에이전트 venv를 가리킵니다. 스케줄러는 시스템 python을 씁니다)
 - [x] `playwright install chromium`
 - [x] ffmpeg 8.1.2 확인
-- [ ] 로열티 프리 BGM 4곡을 `assets/bgm/`에 배치
-      파일명: `calm_tech_01.mp3`, `upbeat_lofi_02.mp3`, `minimal_pulse_03.mp3`, `warm_acoustic_04.mp3`
-      출처 예: 유튜브 오디오 라이브러리, Pixabay Music
-      **없어도 동작하지만 무음으로 나갑니다. 릴스에 무음은 불리합니다**
+- [x] BGM 4곡 — `make_bgm.py`로 ffmpeg 사인파 합성 생성 (실측 mean -28.8dB)
+- [ ] BGM을 실제 음원으로 교체 (선택) — 합성음은 최소한의 대체재입니다.
+      유튜브 오디오 라이브러리나 Pixabay Music에서 받아 같은 파일명으로 덮어쓰면 됩니다
 
 ## 3. 렌더링 (완료)
 
@@ -51,13 +50,14 @@
 - [x] 스펙 확인: h264 / yuv420p / 30fps / 1080x1920 / aac
 - [ ] verify: 실제 폰에서 재생 확인 — `out/day01/reel.mp4`를 옮겨 확인 필요
 
-## 5. 업로드 (코드 완료, 검증 대기)
+## 5. 업로드 (완료 — 실전 게시 성공)
 
-- [~] Cloudinary 업로드 → 공개 URL 반환
-- [~] Graph API 컨테이너 생성 (`media_type=REELS`)
-- [~] `status_code` 폴링 (5초 간격, 최대 5분)
-- [~] `media_publish` 호출
-- [ ] verify: 테스트 1건이 실제 계정에 게시됨 ← **1번 완료 후 가능**
+- [x] Cloudinary 업로드 → 공개 URL 반환
+- [x] Graph API 컨테이너 생성 (`media_type=REELS`)
+- [x] `status_code` 폴링 (실측 인코딩 72초)
+- [x] `media_publish` 호출
+- [x] **verify: day1이 실제 계정에 REELS로 게시됨**
+      https://www.instagram.com/reel/DdBRh_mk8ey/ (2026-09-08 17:38)
 
 ## 6. 스케줄링·운영
 
