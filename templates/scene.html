@@ -1,0 +1,135 @@
+<!-- 릴스 장면 1컷을 1080x1920 PNG로 캡처하기 위한 템플릿. layout 필드로 5종 분기 -->
+<!doctype html>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1920px;
+    font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+    background: #0b1220;
+    color: #e8eefc;
+    overflow: hidden;
+  }
+
+  /* 배경 그라데이션. 장면마다 같은 톤을 유지해 브랜드 일관성 확보 */
+  .bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(900px 900px at 50% 18%, rgba(45, 212, 191, .18), transparent 60%),
+      radial-gradient(700px 700px at 80% 88%, rgba(99, 102, 241, .16), transparent 62%),
+      linear-gradient(180deg, #0b1220 0%, #0d1730 100%);
+  }
+
+  /* 안전 영역 — 인스타 UI가 덮는 상단 220px, 하단 320px을 비움 */
+  .stage {
+    position: absolute;
+    inset: 220px 72px 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 48px;
+  }
+
+  .badge {
+    position: absolute;
+    top: 168px;
+    left: 72px;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #5eead4;
+    opacity: .85;
+  }
+
+  .title {
+    font-size: 88px;
+    font-weight: 800;
+    line-height: 1.26;
+    letter-spacing: -2px;
+    word-break: keep-all;
+  }
+
+  .sub {
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 1.32;
+    color: #9fb3d9;
+    word-break: keep-all;
+  }
+
+  /* hook — 첫 3초. 제일 크게. 하단 320px은 인스타 UI가 덮으므로 중앙 정렬이 안전하다 */
+  .hook .title { font-size: 108px; line-height: 1.2; color: #ffffff; }
+  .hook .sub { font-size: 84px; font-weight: 700; line-height: 1.24; color: #5eead4; }
+
+  /* point — 본문 요점 */
+  .point .title { color: #ffffff; }
+  .point .stage::before {
+    content: "";
+    width: 96px;
+    height: 10px;
+    border-radius: 999px;
+    background: #5eead4;
+    margin-bottom: 12px;
+  }
+
+  /* code — 명령어 원문. 줄이면 틀린 정보가 되므로 축소해서 전부 보여줌 */
+  .code .title {
+    font-family: Consolas, "D2Coding", monospace;
+    font-size: 46px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.5px;
+    color: #7dd3fc;
+    background: rgba(2, 8, 20, .72);
+    border: 2px solid rgba(125, 211, 252, .28);
+    border-radius: 24px;
+    padding: 52px 44px;
+    word-break: break-all;
+  }
+  .code .sub { font-size: 58px; }
+
+  /* compare — 대비 두 줄 */
+  .compare .title {
+    font-size: 76px;
+    color: #fca5a5;
+    background: rgba(239, 68, 68, .1);
+    border-left: 10px solid #ef4444;
+    border-radius: 0 20px 20px 0;
+    padding: 44px 44px;
+  }
+  .compare .sub {
+    font-size: 76px;
+    font-weight: 700;
+    color: #86efac;
+    background: rgba(34, 197, 94, .1);
+    border-left: 10px solid #22c55e;
+    border-radius: 0 20px 20px 0;
+    padding: 44px 44px;
+  }
+
+  /* cta — 마지막 컷 */
+  .cta .stage { align-items: center; text-align: center; }
+  .cta .title { font-size: 96px; color: #ffffff; }
+  .cta .sub {
+    font-size: 60px;
+    font-weight: 700;
+    color: #0b1220;
+    background: #5eead4;
+    border-radius: 999px;
+    padding: 28px 56px;
+  }
+
+  .empty { display: none; }
+</style>
+
+<body class="{{layout}}">
+  <div class="bg"></div>
+  <div class="badge">{{badge}}</div>
+  <div class="stage">
+    <div class="title {{title_empty}}">{{title}}</div>
+    <div class="sub {{sub_empty}}">{{sub}}</div>
+  </div>
+</body>
