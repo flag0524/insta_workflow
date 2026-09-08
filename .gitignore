@@ -1,0 +1,14 @@
+# API 키. 절대 커밋 금지
+.env
+
+# 생성물 — 렌더된 PNG와 MP4
+out/
+
+# 게시 이력. 실행 환경마다 다름
+state.json
+
+__pycache__/
+*.pyc
+
+# BGM 음원 파일 (라이선스 파일을 레포에 넣지 않음)
+assets/bgm/*.mp3
