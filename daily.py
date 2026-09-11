@@ -23,6 +23,7 @@ KST = dt.timezone(dt.timedelta(hours=9))
 W, H, FPS = 1080, 1920, 30
 XFADE = 0.25          # 장면 전환 시간
 WINDOW_MIN = 45       # publish_at 기준 실행 허용 창
+CATCHUP_DAYS = 3      # 밀린 게시물을 며칠 전까지 따라잡을지
 # Instagram API with Instagram Login 계열. 페이스북 페이지 연결이 필요 없고 크리에이터 계정에서 동작한다.
 # 페이스북 로그인 방식(graph.facebook.com)을 쓰는 토큰이라면 이 값을 바꿔야 한다.
 GRAPH = "https://graph.instagram.com/v21.0"
@@ -73,18 +74,40 @@ def pick_post(plan, state, force_day=None, now=None):
         raise SystemExit(f"day {force_day} 없음")
 
     now = now or dt.datetime.now(KST)
+    today = now.date()
+    done = state["published"]
+
+    # 1) 오늘 예정된 항목이 최우선
     for p in plan["posts"]:
-        if p["date"] != now.date().isoformat():
+        if p["date"] != today.isoformat():
             continue
-        if str(p["day"]) in state["published"]:
-            log(f"day{p['day']} 이미 게시됨. 종료")
-            return None
+        if str(p["day"]) in done:
+            log(f"day{p['day']} 이미 게시됨")
+            break
         # 발행 예정 시각 45분 전부터 실행. 지난 시각이면 재시도로 간주해 계속 허용
         if now >= dt.datetime.fromisoformat(p["publish_at"]) - dt.timedelta(minutes=WINDOW_MIN):
             return p
-        log(f"day{p['day']} 발행 시각 전. 종료")
-        return None
-    log("오늘 예정된 게시물 없음. 종료")
+        log(f"day{p['day']} 발행 시각 전")
+        break
+
+    # 2) 지난 날짜 중 아직 못 올린 항목을 따라잡는다.
+    #    날짜가 바뀌면 오늘 것만 보던 탓에 실패한 게시물이 영영 누락됐다
+    limit = today - dt.timedelta(days=CATCHUP_DAYS)
+    for p in plan["posts"]:
+        d = dt.date.fromisoformat(p["date"])
+        if d >= today or str(p["day"]) in done:
+            continue
+        if d < limit:
+            log(f"day{p['day']}({p['date']}) {(today - d).days}일 밀려 건너뜀")
+            continue
+        # 명절 인사처럼 그날에만 말이 되는 콘텐츠는 지나면 올리지 않는다
+        if p.get("date_sensitive"):
+            log(f"day{p['day']}({p['date']}) 날짜 종속 콘텐츠라 건너뜀")
+            continue
+        log(f"day{p['day']}({p['date']}) 밀린 항목 따라잡기")
+        return p
+
+    log("게시할 항목 없음. 종료")
     return None
 
 

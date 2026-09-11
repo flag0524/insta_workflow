@@ -52,8 +52,11 @@ Windows 작업 스케줄러 (매일 07:15 / 09:45 / 20:15 — 3회 트리거)
   └─> python daily.py
         │
         1. content_plan.json 로드
-        2. 오늘 날짜 + publish_at ±45분 안의 항목 1건 선택
-        │     없으면 즉시 종료 (exit 0)
+        2. 게시할 항목 1건 선택
+        │     (a) 오늘 날짜 + publish_at 45분 전부터 → 우선
+        │     (b) 없으면 지난 미게시 항목을 오래된 순으로 따라잡기 (최대 3일)
+        │         단 date_sensitive 항목은 그날이 지나면 건너뜀
+        │     둘 다 없으면 즉시 종료 (exit 0)
         │     state.json에 published 기록 있으면 종료 (중복 방지)
         │
         3. [장면 렌더링]  Playwright
@@ -281,6 +284,8 @@ python validate.py               # 계획 데이터 검사
 | 중복 게시 | state.json day 기록으로 차단 |
 | ffmpeg 미설치 | 시작 시 `ffmpeg -version` 체크 후 즉시 종료 |
 | 원인 추적 | 모든 실행이 `daily.log`에 기록됩니다. 텔레그램을 설정하지 않았다면 여기가 유일한 단서입니다 |
+| 하루가 통째로 밀림 | 다음 트리거가 **지난 미게시 항목을 따라잡습니다**(최대 `CATCHUP_DAYS`=3일). 오늘 것이 먼저고, 그다음 밀린 것 중 가장 오래된 순 |
+| 명절 콘텐츠가 늦게 나감 | `date_sensitive: true`인 항목은 그날이 지나면 게시하지 않고 건너뜁니다 (day17·18·20) |
 
 ---
 
