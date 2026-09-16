@@ -15,7 +15,26 @@ from dotenv import load_dotenv
 ROOT = Path(__file__).parent
 PLAN = ROOT / "content_plan.json"
 STATE = ROOT / "state.json"
-TEMPLATE = ROOT / "templates" / "scene.html"
+TEMPLATES = {
+    "dark": ROOT / "templates" / "scene.html",
+    "card": ROOT / "templates" / "card.html",   # 밝은 카드뉴스 톤 (day7부터)
+}
+TEMPLATE = TEMPLATES["dark"]  # check_env의 존재 확인용 대표 템플릿
+
+# card 테마 point 장면에서 쓰는 인라인 SVG 아이콘. 외부 아이콘 라이브러리 의존 없이 직접 제작
+ICON_SVG = {
+    "file": '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+            '<path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>',
+    "checklist": '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+                 '<rect x="3" y="4" width="4" height="4" rx="1"/><path d="M10 6h11"/>'
+                 '<rect x="3" y="10" width="4" height="4" rx="1"/><path d="M10 12h11"/>'
+                 '<rect x="3" y="16" width="4" height="4" rx="1"/><path d="M10 18h11"/></svg>',
+    "link": '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+            '<path d="M9 15L15 9"/><path d="M10 5h3a4 4 0 0 1 0 8h-1"/>'
+            '<path d="M14 19h-3a4 4 0 0 1 0-8h1"/></svg>',
+    "bookmark": '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+                '<path d="M6 3h12v18l-6-4-6 4z"/></svg>',
+}
 BGM_DIR = ROOT / "assets" / "bgm"
 OUT = ROOT / "out"
 
@@ -116,20 +135,30 @@ def pick_post(plan, state, force_day=None, now=None):
 def render_scenes(post, outdir):
     from playwright.sync_api import sync_playwright
 
-    tpl = TEMPLATE.read_text(encoding="utf-8")
+    tpl_path = TEMPLATES.get(post.get("theme", "dark"), TEMPLATES["dark"])
+    tpl = tpl_path.read_text(encoding="utf-8")
     paths = []
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
         page = browser.new_page(viewport={"width": W, "height": H}, device_scale_factor=1)
         for i, sc in enumerate(post["scenes"]):
-            page.set_content(
+            num = sc.get("num", "")
+            icon = ICON_SVG.get(sc.get("icon"), "")
+            html_out = (
                 tpl.replace("{{layout}}", sc["layout"])
                    .replace("{{badge}}", f"DAY {post['day']} / 30")
                    .replace("{{title}}", html.escape(sc["title"]))
                    .replace("{{sub}}", html.escape(sc["sub"]))
                    .replace("{{title_empty}}", "" if sc["title"] else "empty")
                    .replace("{{sub_empty}}", "" if sc["sub"] else "empty")
+                   .replace("{{num}}", num)
+                   .replace("{{num_empty}}", "" if num else "empty")
+                   .replace("{{icon}}", icon)
+                   .replace("{{icon_empty}}", "" if icon else "empty")
+                   # card 레이아웃 중 hook만 카드 컨테이너를 감춘다 (CSS에서 처리, 플레이스홀더는 no-op로 둠)
+                   .replace("{{card_empty}}", "")
             )
+            page.set_content(html_out)
             path = outdir / f"s{i + 1:02d}.png"
             page.screenshot(path=str(path))
             paths.append(path)
@@ -234,9 +263,11 @@ def upload_hosting(video, cover):
 
 # ---------- 6. 게시 ----------
 
-def publish_reel(video_url, cover_url, caption):
-    ig_id, token = os.environ["IG_USER_ID"], os.environ["IG_ACCESS_TOKEN"]
+ENCODE_RETRIES = 3   # 같은 영상으로 컨테이너를 다시 만들어보는 횟수 (진단 결과 재시도만으로 대부분 해결됨)
+ENCODE_RETRY_WAIT = 10  # 재시도 사이 대기(초). 곧바로 재시도하면 또 실패하는 경우가 있어 간격을 둠
 
+
+def _create_container(ig_id, token, video_url, cover_url, caption):
     r = requests.post(
         f"{GRAPH}/{ig_id}/media",
         data={
@@ -252,8 +283,11 @@ def publish_reel(video_url, cover_url, caption):
     r.raise_for_status()
     creation_id = r.json()["id"]
     log(f"컨테이너 생성: {creation_id}")
+    return creation_id
 
-    # 인코딩은 비동기다. FINISHED가 될 때까지 기다린다
+
+def _wait_encoding(creation_id, token):
+    """인코딩은 비동기다. FINISHED/ERROR/EXPIRED가 나올 때까지 기다린다."""
     deadline = time.time() + 300
     while time.time() < deadline:
         s = requests.get(
@@ -262,14 +296,29 @@ def publish_reel(video_url, cover_url, caption):
             timeout=30,
         ).json()
         code = s.get("status_code")
-        if code == "FINISHED":
-            break
-        if code == "ERROR":
-            raise RuntimeError(f"인코딩 실패: {s.get('status')}")
+        if code in ("FINISHED", "ERROR", "EXPIRED"):
+            return code, s.get("status")
         log(f"인코딩 대기 중... ({code})")
         time.sleep(5)
-    else:
-        raise TimeoutError(f"인코딩 5분 초과. creation_id={creation_id}")
+    return "TIMEOUT", None
+
+
+def publish_reel(video_url, cover_url, caption):
+    ig_id, token = os.environ["IG_USER_ID"], os.environ["IG_ACCESS_TOKEN"]
+
+    # 실측 결과 인코딩 ERROR는 영상 문제가 아니라 인스타 쪽 일시적 오류였다.
+    # 같은 video_url로 새 컨테이너를 다시 만들면 대부분 그 자리에서 해결된다.
+    for attempt in range(1, ENCODE_RETRIES + 1):
+        creation_id = _create_container(ig_id, token, video_url, cover_url, caption)
+        code, status = _wait_encoding(creation_id, token)
+        if code == "FINISHED":
+            break
+        log(f"인코딩 {code} (시도 {attempt}/{ENCODE_RETRIES}): {status}")
+        if attempt == ENCODE_RETRIES:
+            if code == "TIMEOUT":
+                raise TimeoutError(f"인코딩 5분 초과. creation_id={creation_id}")
+            raise RuntimeError(f"인코딩 실패({code}) — {ENCODE_RETRIES}회 재시도 모두 실패: {status}")
+        time.sleep(ENCODE_RETRY_WAIT)  # 곧바로 재시도하면 또 실패하는 경우가 있어 간격을 둔다
 
     r = requests.post(
         f"{GRAPH}/{ig_id}/media_publish",
@@ -348,9 +397,10 @@ def check_env():
             print(f"Cloudinary 인증: 실패 — {str(e)[:120]}")
             ok = False
 
-    if not TEMPLATE.exists():
-        print(f"{TEMPLATE.name}: MISSING")
-        ok = False
+    for name, path in TEMPLATES.items():
+        if not path.exists():
+            print(f"templates/{path.name} ({name}): MISSING")
+            ok = False
 
     missing_bgm = [b for b in json.loads(PLAN.read_text(encoding="utf-8"))["meta"]["bgm_pool"]
                    if not (BGM_DIR / f"{b}.mp3").exists()]
