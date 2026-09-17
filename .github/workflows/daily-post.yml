@@ -67,11 +67,17 @@ jobs:
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          # workflow_dispatch 입력값은 스크립트 텍스트에 직접 끼워 넣지 않고
+          # 환경변수로만 전달한다. ${{ }}는 셸이 파싱하기 전에 문자 그대로
+          # 치환되므로, 입력값에 셸 메타문자가 있으면 같은 job의 시크릿에
+          # 접근하는 임의 명령 실행으로 이어질 수 있다(스크립트 인젝션).
+          INPUT_DAY: ${{ github.event.inputs.day }}
+          INPUT_DRY_RUN: ${{ github.event.inputs.dry_run }}
         run: |
-          ARGS=""
-          if [ -n "${{ github.event.inputs.day }}" ]; then ARGS="$ARGS --day ${{ github.event.inputs.day }}"; fi
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
-          python daily.py $ARGS
+          ARGS=()
+          if [ -n "$INPUT_DAY" ]; then ARGS+=(--day "$INPUT_DAY"); fi
+          if [ "$INPUT_DRY_RUN" = "true" ]; then ARGS+=(--dry-run); fi
+          python daily.py "${ARGS[@]}"
 
       - name: 게시 이력 커밋
         if: always()
