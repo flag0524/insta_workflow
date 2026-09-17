@@ -377,13 +377,30 @@ daily.log는 반대로 git에 넣지 않기로 했습니다. GitHub Actions 자�
 
 ---
 
+## 2026-09-17 (3차) — 스크립트 인젝션 수정 + 첫 실전 실행 확인
+
+### 보안 검토에서 잡은 것
+
+커밋 후 자동 보안 검토가 `daily-post.yml`의 스크립트 인젝션 취약점을 잡았습니다. `workflow_dispatch`의 `day`/`dry_run` 입력값을 `run:` 스크립트 텍스트에 `${{ }}`로 직접 끼워 넣고 있었는데, 이 치환은 셸이 스크립트를 파싱하기 **전에** 문자 그대로 이뤄져서, 입력값에 `;`나 백틱 같은 셸 메타문자가 있으면 같은 job의 시크릿(IG_ACCESS_TOKEN 등)에 접근하는 임의 명령 실행으로 이어질 수 있었습니다.
+
+`workflow_dispatch`는 쓰기 권한자만 트리거 가능해 위험도는 제한적이지만, 표준대로 고쳤습니다. 입력값을 `env:`로 넘기고 스크립트에서는 환경변수(`$INPUT_DAY`)로만 참조합니다. 환경변수 값은 셸이 문법으로 재해석하지 않고 값 그대로 치환되므로 인젝션 경로가 막힙니다. `ARGS`도 문자열 concat 대신 배열로 바꿔 따옴표 처리를 정리했습니다.
+
+### 사용자가 이미 첫 실행을 마쳤습니다
+
+수정을 푸시하려는데 원격에 제가 모르는 커밋(`43f4a21 chore: 게시 이력 갱신`)이 있었습니다. **사용자가 이미 시크릿을 등록하고 워크플로우를 실행했고, day10이 실제로 게시됐습니다** (2026-09-17 11:02:06, media_id `18115764571961653`).
+
+중요한 점: 로컬에서는 day10이 인코딩 ERROR로 계속 실패했는데(같은 날 아침), GitHub Actions에서는 성공했습니다. "이 계정에 제한이 걸렸을 수 있다"던 09-16~09-17 오전의 의심은 결과적으로 계정 문제가 아니었을 가능성이 높습니다 — 로컬 환경(그날 진단하며 만든 컨테이너 수, 또는 로컬 네트워크 경로)과 관련된 일시적 문제였을 수 있습니다. GitHub Actions 러너에서는 재현되지 않았습니다.
+
+state.json은 addition-only라 충돌 없이 rebase로 병합했습니다.
+
+---
+
 ## 다음 세션이 알아야 할 것 (2026-09-17 최신)
 
-1. **실행 주체가 로컬 스케줄러 → GitHub Actions로 바뀌었습니다.** `인스타릴스-*` 작업 3개는 비활성화 상태(삭제 아님)입니다. 로컬에서 뭔가 안 올라간다고 스케줄러부터 보지 마세요 — 이제 안 씁니다.
-2. **막힌 것은 GitHub Secrets 등록 하나입니다.** 리포지토리 Settings → Secrets and variables → Actions에 7개(`IG_USER_ID`, `IG_ACCESS_TOKEN`, `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`, `TELEGRAM_TOKEN`, `TELEGRAM_CHAT_ID`)를 사용자가 직접 등록해야 합니다. `gh` CLI가 없어 제가 대신 못 합니다.
-3. **워크플로우는 아직 한 번도 실제로 돌아본 적이 없습니다.** YAML 문법만 검증했습니다. 시크릿 등록 후 Actions 탭에서 `workflow_dispatch`로 첫 실행을 사용자가 직접 트리거해야 합니다.
-4. **게시 이력은 이제 `state.json`이 git에 커밋되는 것으로 관리합니다.** 로컬에서 수동으로 `daily.py`를 돌리면 로컬 `state.json`과 리포의 `state.json`이 갈라질 수 있으니, GitHub Actions 도입 후에는 로컬에서 실제 게시(`--dry-run` 없이)를 하지 마세요. 하려면 먼저 `git pull`로 최신 `state.json`을 받고, 끝나면 바로 커밋·푸시하세요.
-5. **day7, day9, day10이 미게시 상태로 남아 있습니다.** 첫 GitHub Actions 실행이 성공하면 따라잡기 로직이 자동으로 처리합니다 (day7은 CATCHUP_DAYS=3 경계에 걸쳐 있어 너무 늦으면 건너뛸 수 있음 — `date_sensitive`는 아니라서 오래돼도 값어치는 있지만 계획서상 "밀린 시점 콘텐츠"라는 티가 날 수 있습니다).
-6. **인코딩 ERROR가 이틀(09-16, 09-17) 연속 재현됐습니다.** 정상 영상·정상 계정 상태로도 실패해서 코드 문제가 아닐 가능성이 있습니다. 세 번째 날도 반복되면 Meta Business Suite에서 계정 제한 여부를 확인하세요.
-7. 수정 후 반드시 — `content_plan.json` → `python validate.py` / `daily.py` → `python test_pick_post.py`
-8. 원격: https://github.com/flag0524/insta_workflow (public)
+1. **GitHub Actions가 실전에서 동작 중입니다.** 시크릿 등록·첫 실행 모두 사용자가 완료했고, day10이 실제로 게시됐습니다(`state.json` 확인). `인스타릴스-*` 로컬 작업 3개는 비활성화 상태(삭제 아님)이고 더는 쓰지 않습니다.
+2. **로컬 인코딩 ERROR 반복은 계정 문제가 아니었을 가능성이 큽니다.** 로컬에서 실패하던 day10이 GitHub Actions에서는 바로 성공했습니다. 앞으로 또 실패가 나면 "계정 제한"보다 먼저 실행 환경(로컬 vs Actions) 차이부터 의심하세요.
+3. **게시 이력은 `state.json`이 git에 커밋되는 것으로 관리합니다.** 워크플로우가 실행 후 자동으로 커밋·푸시합니다. 로컬에서 실제 게시(`--dry-run` 없이)는 하지 마세요 — 하려면 먼저 `git pull`, 끝나면 바로 `git push`.
+4. **스크립트 인젝션 취약점을 수정했습니다.** `workflow_dispatch` 입력값은 `run:` 스크립트에 `${{ }}`로 직접 끼워 넣지 말고 반드시 `env:`로 넘겨 환경변수로만 참조하세요. 워크플로우 파일을 더 고칠 때 같은 패턴을 반복하지 않도록 주의.
+5. **day7, day9는 아직 확인 안 됨.** day10만 확인했고, day7·9가 이미 게시됐는지 `state.json`을 다시 보세요. day7은 `CATCHUP_DAYS`=3 경계 근처라 너무 늦으면 건너뛸 수 있습니다.
+6. 수정 후 반드시 — `content_plan.json` → `python validate.py` / `daily.py` → `python test_pick_post.py` / 워크플로우 YAML → `python -c "import yaml; yaml.safe_load(...)"`로 문법 확인
+7. 원격: https://github.com/flag0524/insta_workflow (public) · 워크플로우: `.github/workflows/daily-post.yml`
