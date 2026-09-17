@@ -12,6 +12,9 @@ state.json
 # 실행 로그
 daily.log
 
+# 동시 실행 방지 락 (실행 중에만 존재해야 함)
+daily.lock
+
 __pycache__/
 *.pyc
 

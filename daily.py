@@ -15,6 +15,8 @@ from dotenv import load_dotenv
 ROOT = Path(__file__).parent
 PLAN = ROOT / "content_plan.json"
 STATE = ROOT / "state.json"
+LOCK = ROOT / "daily.lock"
+LOCK_STALE_MIN = 20   # 이보다 오래된 락은 죽은 프로세스로 보고 넘겨받는다 (렌더+업로드+인코딩 실측 최대 3~4분)
 TEMPLATES = {
     "dark": ROOT / "templates" / "scene.html",
     "card": ROOT / "templates" / "card.html",   # 밝은 카드뉴스 톤 (day7부터)
@@ -73,6 +75,28 @@ def notify(msg):
         )
     except Exception as e:
         log(f"알림 전송 실패: {e}")
+
+
+def acquire_lock():
+    """스케줄러 3개가 밀린 트리거를 동시에 따라잡을 때 같은 day를 동시에 렌더링하는 것을 막는다.
+    실제로 07:15/20:15 트리거가 PC 재부팅 시점에 겹쳐 발생했고, out/day{N}/ 파일을
+    두 프로세스가 동시에 쓰면서 한쪽이 절반만 써진 영상을 업로드해 실패했다."""
+    try:
+        fd = os.open(LOCK, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+        os.write(fd, str(os.getpid()).encode())
+        os.close(fd)
+        return True
+    except FileExistsError:
+        age_min = (time.time() - LOCK.stat().st_mtime) / 60
+        if age_min < LOCK_STALE_MIN:
+            return False
+        log(f"오래된 락 파일 발견({age_min:.0f}분 전). 죽은 프로세스로 보고 넘겨받음")
+        LOCK.unlink(missing_ok=True)
+        return acquire_lock()
+
+
+def release_lock():
+    LOCK.unlink(missing_ok=True)
 
 
 def load_state():
@@ -423,41 +447,48 @@ def main():
     if args.check_env:
         return check_env()
 
-    plan = json.loads(PLAN.read_text(encoding="utf-8"))
-    state = load_state()
-
-    post = pick_post(plan, state, args.day)
-    if not post:
+    if not acquire_lock():
+        log("다른 실행이 진행 중(락 존재). 종료")
         return 0
-
-    log(f"day{post['day']} 시작 — {post['topic']}")
-    outdir = OUT / f"day{post['day']:02d}"
-    outdir.mkdir(parents=True, exist_ok=True)
 
     try:
-        pngs = render_scenes(post, outdir)
-        video = build_video(post, pngs, outdir)
-        caption = build_caption(plan, post)
+        plan = json.loads(PLAN.read_text(encoding="utf-8"))
+        state = load_state()
 
-        if args.dry_run:
-            log(f"dry-run 종료. {video}")
+        post = pick_post(plan, state, args.day)
+        if not post:
             return 0
 
-        video_url, cover_url = upload_hosting(video, pngs[post["cover_scene"]])
-        media_id = publish_reel(video_url, cover_url, caption)
+        log(f"day{post['day']} 시작 — {post['topic']}")
+        outdir = OUT / f"day{post['day']:02d}"
+        outdir.mkdir(parents=True, exist_ok=True)
 
-        state["published"][str(post["day"])] = {
-            "at": dt.datetime.now(KST).isoformat(),
-            "media_id": media_id,
-            "topic": post["topic"],
-        }
-        save_state(state)
-        return 0
+        try:
+            pngs = render_scenes(post, outdir)
+            video = build_video(post, pngs, outdir)
+            caption = build_caption(plan, post)
 
-    except Exception as e:
-        log(f"실패: {e}")
-        notify(f"[인스타 자동화] day{post['day']} 실패\n{type(e).__name__}: {e}")
-        return 1
+            if args.dry_run:
+                log(f"dry-run 종료. {video}")
+                return 0
+
+            video_url, cover_url = upload_hosting(video, pngs[post["cover_scene"]])
+            media_id = publish_reel(video_url, cover_url, caption)
+
+            state["published"][str(post["day"])] = {
+                "at": dt.datetime.now(KST).isoformat(),
+                "media_id": media_id,
+                "topic": post["topic"],
+            }
+            save_state(state)
+            return 0
+
+        except Exception as e:
+            log(f"실패: {e}")
+            notify(f"[인스타 자동화] day{post['day']} 실패\n{type(e).__name__}: {e}")
+            return 1
+    finally:
+        release_lock()
 
 
 if __name__ == "__main__":
