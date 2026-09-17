@@ -344,13 +344,46 @@ Windows 작업 스케줄러의 "MultipleInstances: IgnoreNew"는 **같은 작업
 
 ---
 
-## 다음 세션이 알아야 할 것
+## 2026-09-17 (2차) — GitHub Actions로 이전
 
-1. **파이프라인은 전 구간 동작합니다.** 30일 전량 dry-run 30/30 성공, 스케줄러 실행까지 검증됐습니다.
-2. **막힌 곳은 API 키 하나뿐입니다.** `checklist.md` 1번(Meta 앱·토큰·Cloudinary)이 사용자 수동 작업이고, 그게 끝나야 업로드 경로가 열립니다.
-3. 업로드·게시·알림 코드는 작성됐지만 **실행된 적이 없습니다.** 키를 넣은 뒤 `--day 1`로 한 번 수동 확인하고 스케줄러에 맡기세요.
-4. **스케줄러는 이미 돌고 있습니다.** 키가 없는 동안은 매 트리거마다 `.env` 누락으로 실패합니다. `daily.log`에 쌓이지만 무해합니다.
-5. 수정 후 반드시 — `content_plan.json` → `validate.py` / `daily.py` → `test_pick_post.py`
-6. day1 발행이 2026-09-09 21:00입니다. 그 전에 API 키가 필요합니다.
-7. BGM 4곡이 비어 있습니다. 없으면 무음으로 나가고, 릴스에 무음은 불리합니다.
+### 결정 이유
+
+바로 이전에 잡은 동시 실행 레이스 컨디션(파일 락으로 수정)의 근본 원인은 결국 "로컬 PC 전원 상태에 실행이 묶여 있다"는 것이었습니다. PC가 꺼져 있으면 트리거가 밀리고, 밀린 트리거가 부팅 시점에 몰려서 겹칩니다. 파일 락은 증상을 막았지만, 애초에 로컬 스케줄러 자체가 이 클래스의 문제를 계속 만들어낼 구조였습니다.
+
+사용자가 GitHub Actions 이전을 요청해서 옮겼습니다. GitHub 서버에서 정시 실행되므로 로컬 PC 전원과 무관하고, `concurrency` 설정으로 겹치는 실행을 아예 대기열로 직렬화할 수 있습니다.
+
+### state.json을 git 추적으로 전환
+
+가장 중요한 구조 변경입니다. 로컬 실행은 디스크에 상태가 남지만, GitHub Actions는 매번 새 체크아웃입니다. `state.json`을 `.gitignore`에서 빼고 리포에 커밋했고, 워크플로우 마지막 단계가 실행 후 변경분을 자동으로 커밋·푸시하도록 했습니다. 이걸 빼먹으면 매 실행마다 이력을 잃어버려 매번 첫날부터 다시 시도하거나, 최악의 경우 이미 올린 걸 중복 게시합니다.
+
+daily.log는 반대로 git에 넣지 않기로 했습니다. GitHub Actions 자체의 실행 로그가 이미 영구 기록이라 굳이 파일로 한 번 더 커밋할 이유가 없습니다.
+
+### BGM은 리포에 안 넣고 매번 재생성
+
+`assets/bgm/*.mp3`는 여전히 gitignore 대상입니다. 라이선스가 있는 실제 파일이 아니라 `make_bgm.py`의 ffmpeg 사인파 합성이라, 바이너리를 리포에 쌓아두는 대신 워크플로우가 매번 `python make_bgm.py`로 재생성합니다. 결정적(deterministic)이라 매번 같은 결과가 나오고, 리포는 깨끗하게 유지됩니다.
+
+### 로컬 스케줄러는 삭제 대신 비활성화
+
+`Disable-ScheduledTask`로 껐습니다. 삭제와 달리 `Enable-ScheduledTask` 한 줄로 되돌릴 수 있습니다. 로컬과 GitHub Actions가 동시에 살아있으면 같은 클래스의 레이스가 두 시스템 사이에서 다시 날 수 있어 반드시 하나만 켜져 있어야 합니다.
+
+### 이 세션이 끝내지 못한 것
+
+`gh` CLI가 이 환경에 설치돼 있지 않고, 설치하더라도 `gh auth login`은 브라우저 인증이 필요해 비대화형 세션에서 완주할 수 없습니다. 그래서:
+
+1. **GitHub Secrets 7개는 사용자가 직접 등록해야 합니다.** 로컬 `.env`에 이미 있는 값 그대로 리포지토리 Settings에 넣으면 됩니다.
+2. **첫 실행도 사용자가 Actions 탭에서 `workflow_dispatch`로 수동 트리거해야 합니다.** 제가 대신 실행해볼 방법이 없습니다.
+
+두 가지가 끝나야 이 마이그레이션이 실전 검증됩니다. `.github/workflows/daily-post.yml`은 YAML 문법 검증만 마친 상태입니다.
+
+---
+
+## 다음 세션이 알아야 할 것 (2026-09-17 최신)
+
+1. **실행 주체가 로컬 스케줄러 → GitHub Actions로 바뀌었습니다.** `인스타릴스-*` 작업 3개는 비활성화 상태(삭제 아님)입니다. 로컬에서 뭔가 안 올라간다고 스케줄러부터 보지 마세요 — 이제 안 씁니다.
+2. **막힌 것은 GitHub Secrets 등록 하나입니다.** 리포지토리 Settings → Secrets and variables → Actions에 7개(`IG_USER_ID`, `IG_ACCESS_TOKEN`, `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`, `TELEGRAM_TOKEN`, `TELEGRAM_CHAT_ID`)를 사용자가 직접 등록해야 합니다. `gh` CLI가 없어 제가 대신 못 합니다.
+3. **워크플로우는 아직 한 번도 실제로 돌아본 적이 없습니다.** YAML 문법만 검증했습니다. 시크릿 등록 후 Actions 탭에서 `workflow_dispatch`로 첫 실행을 사용자가 직접 트리거해야 합니다.
+4. **게시 이력은 이제 `state.json`이 git에 커밋되는 것으로 관리합니다.** 로컬에서 수동으로 `daily.py`를 돌리면 로컬 `state.json`과 리포의 `state.json`이 갈라질 수 있으니, GitHub Actions 도입 후에는 로컬에서 실제 게시(`--dry-run` 없이)를 하지 마세요. 하려면 먼저 `git pull`로 최신 `state.json`을 받고, 끝나면 바로 커밋·푸시하세요.
+5. **day7, day9, day10이 미게시 상태로 남아 있습니다.** 첫 GitHub Actions 실행이 성공하면 따라잡기 로직이 자동으로 처리합니다 (day7은 CATCHUP_DAYS=3 경계에 걸쳐 있어 너무 늦으면 건너뛸 수 있음 — `date_sensitive`는 아니라서 오래돼도 값어치는 있지만 계획서상 "밀린 시점 콘텐츠"라는 티가 날 수 있습니다).
+6. **인코딩 ERROR가 이틀(09-16, 09-17) 연속 재현됐습니다.** 정상 영상·정상 계정 상태로도 실패해서 코드 문제가 아닐 가능성이 있습니다. 세 번째 날도 반복되면 Meta Business Suite에서 계정 제한 여부를 확인하세요.
+7. 수정 후 반드시 — `content_plan.json` → `python validate.py` / `daily.py` → `python test_pick_post.py`
 8. 원격: https://github.com/flag0524/insta_workflow (public)

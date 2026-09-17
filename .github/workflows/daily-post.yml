@@ -1,0 +1,83 @@
+name: 인스타 릴스 자동 게시
+
+# 로컬 Windows 작업 스케줄러(07:15/09:45/20:15 KST)를 대체한다.
+# GitHub Actions cron은 UTC 기준이라 KST-9시간으로 환산했다.
+on:
+  schedule:
+    - cron: "15 22 * * *"   # 07:15 KST (전날 22:15 UTC)
+    - cron: "45 0 * * *"    # 09:45 KST
+    - cron: "15 11 * * *"   # 20:15 KST
+  workflow_dispatch:        # Actions 탭에서 수동 실행 (테스트용)
+    inputs:
+      day:
+        description: "특정 day를 강제 실행 (비우면 오늘 예정분 자동 선택)"
+        required: false
+      dry_run:
+        description: "true면 렌더까지만 하고 실제 게시는 하지 않음"
+        required: false
+        default: "false"
+
+# 밀린 트리거 두 개가 겹쳐도(예: 러너 지연) state.json을 동시에 건드리지 않도록 직렬화한다.
+# 로컬 daily.lock과 같은 목적이지만 워크플로우 실행 단위로 막는 편이 더 확실하다.
+concurrency:
+  group: daily-post
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # 게시 이력(state.json)을 워크플로우가 직접 커밋·푸시하기 위해 필요
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: ffmpeg 확인 (ubuntu-latest엔 보통 이미 있음)
+        run: ffmpeg -version || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+
+      - name: 파이썬 의존성 설치
+        run: pip install -r requirements.txt
+
+      - name: BGM 생성 (라이선스 파일이 아니라 합성음 — 매 실행마다 재생성)
+        run: python make_bgm.py
+
+      - name: 환경 점검 (시크릿 미설정 시 여기서 바로 실패)
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+        run: python daily.py --check-env
+
+      - name: Playwright Chromium 설치
+        run: playwright install --with-deps chromium
+
+      - name: 오늘자(또는 밀린) 게시 실행
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          ARGS=""
+          if [ -n "${{ github.event.inputs.day }}" ]; then ARGS="$ARGS --day ${{ github.event.inputs.day }}"; fi
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          python daily.py $ARGS
+
+      - name: 게시 이력 커밋
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add state.json
+          git diff --cached --quiet || git commit -m "chore: 게시 이력 갱신"
+          git push

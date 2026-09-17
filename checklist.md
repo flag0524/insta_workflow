@@ -61,14 +61,32 @@
 
 ## 6. 스케줄링·운영
 
-- [x] `state.json` 기록·중복 방지 → `test_pick_post.py` 10개 케이스 통과
+- [x] `state.json` 기록·중복 방지 → `test_pick_post.py` 13개 케이스 통과
 - [x] 발행창 45분 경계, 발행 시각 경과 후 재시도 검증
-- [x] `daily.log` 파일 로깅 추가 (스케줄러 실행 시 표준출력이 사라지므로)
-- [x] 작업 스케줄러 3개 등록 — `인스타릴스-아침`(07:15) / `-오전`(09:45) / `-저녁`(20:15)
-- [x] "놓친 작업 즉시 실행"(StartWhenAvailable) 활성화
-- [x] verify: 스케줄러 수동 실행 → `LastTaskResult=0`, 로그 정상 기록
-- [~] 실패 시 텔레그램 알림 (토큰 없어 미검증)
-- [ ] verify: PC 재부팅 후에도 트리거 유지
+- [x] 밀린 게시물 따라잡기(catch-up) 로직 — 자정 넘어가면 실패분이 영구 누락되던 버그 수정
+- [x] 동시 실행 방지 파일 락(`daily.lock`) — 밀린 트리거 2개가 같은 순간 겹쳐 파일 레이스가 났던 사고 수정
+- [x] `daily.log` 파일 로깅 추가 (로컬 스케줄러 실행 시 표준출력이 사라지므로)
+
+### ~~Windows 작업 스케줄러~~ (2026-09-17부로 GitHub Actions로 대체, 아래 6-1 참고)
+
+- [x] ~~작업 스케줄러 3개 등록~~ → **비활성화함** (`Disable-ScheduledTask`, 삭제 아님)
+- [x] ~~"놓친 작업 즉시 실행" 활성화~~
+- [x] ~~verify: 스케줄러 수동 실행~~ — 로컬 PC 전원 의존성 자체가 레이스 사고의 원인이라 폐기
+
+## 6-1. GitHub Actions 이전 (신규)
+
+- [x] `.github/workflows/daily-post.yml` 작성 — cron 3개(UTC 환산) + `workflow_dispatch` + `concurrency` 직렬화
+- [x] `requirements.txt` 작성
+- [x] `state.json`을 `.gitignore`에서 제외하고 git 추적 대상으로 전환, 현재 이력 커밋
+- [x] 워크플로우 마지막 단계에 게시 이력 자동 커밋·푸시 추가
+- [x] YAML 문법 파싱 검증
+- [x] 로컬 스케줄러 비활성화
+- [ ] **GitHub 리포지토리에 시크릿 7개 등록** ← 사용자가 직접 (Settings → Secrets and variables → Actions)
+      `IG_USER_ID`, `IG_ACCESS_TOKEN`, `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`, `TELEGRAM_TOKEN`(선택), `TELEGRAM_CHAT_ID`(선택)
+- [ ] verify: Actions 탭에서 `workflow_dispatch`로 수동 1회 실행 → 성공 확인
+- [ ] verify: 실행 후 `state.json`이 자동 커밋되는지 확인
+- [ ] verify: 예약된 cron 트리거가 실제 시각(±지연)에 실행되는지 하루 지켜보기
+- [~] 실패 시 텔레그램 알림 (토큰 등록 전이라 미검증)
 
 ## 7. 운영 중 점검
 

@@ -4,7 +4,9 @@
 **타깃**: 개발자, 1인 사업자, 사이드 프로젝트 운영자 (20~40대)
 **기간**: 2026-09-08(화) ~ 2026-10-07(수), 30일 / 1일 1건
 **포맷**: 전량 릴스(9:16, 1080x1920)
-**스택**: Python 3.11 + Windows 작업 스케줄러 + Playwright + ffmpeg + Instagram Graph API
+**스택**: Python 3.11 + GitHub Actions + Playwright + ffmpeg + Instagram Graph API
+
+> **2026-09-17 변경**: 로컬 Windows 작업 스케줄러에서 GitHub Actions로 이전했습니다. 로컬 PC 전원 상태와 무관하게 실행되고, 시크릿은 GitHub Secrets로 관리합니다. 기존 3개 로컬 작업은 비활성화(삭제 아님)해뒀습니다. 자세한 내용은 11절 참고.
 
 ---
 
@@ -301,7 +303,67 @@ python validate.py               # 계획 데이터 검사
 
 ---
 
-## 11. 미확정 사항
+## 11. GitHub Actions 이전 (2026-09-17)
+
+### 왜 옮겼나
+
+로컬 PC가 밤새 꺼져 있으면 트리거가 밀리고, 밀린 트리거 여러 개가 부팅 시점에 겹쳐 동시 실행 레이스가 나는 사고가 실제로 있었습니다(context-notes 09-17 참고). GitHub Actions는 PC 전원과 무관하게 GitHub 서버에서 정시에 실행되고, `concurrency` 설정으로 겹침 자체를 원천 차단합니다.
+
+### 구조
+
+```
+.github/workflows/daily-post.yml
+  on.schedule: cron 3개 (07:15/09:45/20:15 KST → UTC 환산)
+  on.workflow_dispatch: Actions 탭에서 수동 실행 (day/dry_run 입력 가능)
+  concurrency: group daily-post — 겹치는 실행은 대기열로 직렬화
+
+  1. checkout
+  2. Python 3.11 설정
+  3. ffmpeg 확인 (ubuntu-latest엔 보통 이미 있음)
+  4. pip install -r requirements.txt
+  5. make_bgm.py 실행 (BGM은 합성음이라 매번 재생성. 리포에 안 넣음)
+  6. daily.py --check-env (시크릿 문제면 여기서 바로 실패)
+  7. playwright install --with-deps chromium
+  8. daily.py 실제 실행
+  9. state.json 변경분 자동 커밋·푸시
+```
+
+### state.json을 이제 git에 커밋합니다
+
+CI는 매번 새 체크아웃이라 로컬 디스크에 상태가 남지 않습니다. `state.json`을 `.gitignore`에서 빼고 리포에 커밋했고, 워크플로우 마지막 단계가 실행 후 변경분을 자동으로 커밋·푸시합니다. 이게 없으면 매 실행마다 무엇을 이미 올렸는지 몰라 중복 게시하거나, 반대로 계속 처음부터 다시 시도합니다.
+
+### 시크릿 (사용자가 직접 등록해야 함)
+
+`gh` CLI가 이 환경에 없어 제가 대신 등록할 수 없습니다. 리포지토리 Settings → Secrets and variables → Actions → New repository secret에서 아래 7개를 로컬 `.env` 값 그대로 등록하세요.
+
+```
+IG_USER_ID
+IG_ACCESS_TOKEN
+CLOUDINARY_CLOUD_NAME
+CLOUDINARY_API_KEY
+CLOUDINARY_API_SECRET
+TELEGRAM_TOKEN       (선택)
+TELEGRAM_CHAT_ID     (선택)
+```
+
+### 로컬 스케줄러는 비활성화했습니다 (삭제 아님)
+
+같은 게시물을 로컬과 GitHub Actions가 동시에 시도하면 다시 레이스가 날 수 있어 `인스타릴스-아침/오전/저녁` 3개를 `Disable-ScheduledTask`로 꺼뒀습니다. 되돌리려면 `Enable-ScheduledTask`면 됩니다.
+
+### GitHub Actions cron의 알려진 한계
+
+- 부하가 몰리면 예약 시각보다 몇 분 늦게 실행될 수 있습니다 (문서화된 동작). `daily.py`의 발행창(45분)이 이 여유를 흡수합니다.
+- **리포에 60일간 아무 활동이 없으면 예약 워크플로우가 자동 비활성화됩니다.** 게시가 계속 이어지면 매번 커밋이 발생해 자연히 활동이 유지되지만, 만약 30일 계획 종료 후 방치한다면 이 점을 기억해두세요.
+
+### 검증한 것 / 아직 안 한 것
+
+- [x] YAML 문법 파싱 확인
+- [x] 로컬 스케줄러 비활성화 확인
+- [ ] 실제 GitHub Actions 실행 — **시크릿 등록 후 Actions 탭에서 수동 실행(workflow_dispatch)으로 먼저 확인 필요**
+
+---
+
+## 12. 미확정 사항
 
 - Meta 앱 심사: 본인 계정에만 게시하면 개발 모드로 가능하나 토큰 발급은 직접 진행 필요
 - BGM 출처 미정. 유튜브 오디오 라이브러리 또는 Pixabay 무료 음원 예정. **넣지 않아도 무음으로 동작은 합니다**
