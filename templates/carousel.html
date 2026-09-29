@@ -1,0 +1,164 @@
+<!-- 카드뉴스(피드 캐러셀) 1장을 1080x1350(4:5)으로 캡처하기 위한 템플릿. card.html과 같은 콘텐츠(scenes)를 재사용하되
+     릴스처럼 상하단에 인스타 UI가 겹치지 않으므로 안전 여백을 줄이고 4:5 비율에 맞춰 여백/폰트만 재조정했다. -->
+<!doctype html>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1350px;
+    font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+    background: #eefdf8;
+    color: #0f2a43;
+    overflow: hidden;
+  }
+
+  .bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(900px 900px at 50% 10%, rgba(45, 212, 191, .28), transparent 60%),
+      radial-gradient(700px 700px at 85% 90%, rgba(96, 165, 250, .22), transparent 62%),
+      linear-gradient(160deg, #eafff8 0%, #e6f2ff 100%);
+  }
+
+  /* 피드 캐러셀은 릴스와 달리 상단 220px/하단 320px을 앱 UI가 덮지 않으므로 여백을 줄여 콘텐츠 영역을 넓게 쓴다 */
+  .stage {
+    position: absolute;
+    inset: 140px 72px 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 36px;
+  }
+
+  .daybadge {
+    position: absolute;
+    top: 64px;
+    left: 72px;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #0d9488;
+    opacity: .85;
+  }
+
+  .card {
+    background: #ffffff;
+    border-radius: 40px;
+    box-shadow: 0 24px 60px rgba(15, 42, 67, .12);
+    padding: 64px 56px;
+  }
+
+  .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 104px;
+    height: 104px;
+    border-radius: 24px;
+    background: #14213d;
+    color: #ffffff;
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 32px;
+  }
+  .num.empty { display: none; }
+
+  .icon {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #b9f5e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+  .icon svg { width: 62px; height: 62px; stroke: #0d9488; }
+  .icon.empty { display: none; }
+
+  .title {
+    font-size: 68px;
+    font-weight: 800;
+    line-height: 1.28;
+    letter-spacing: -1.2px;
+    color: #0f2a43;
+    word-break: keep-all;
+  }
+
+  .sub {
+    font-size: 44px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #64748b;
+    word-break: keep-all;
+    margin-top: 14px;
+  }
+
+  .hook .card { background: none; box-shadow: none; padding: 0; }
+  .hook .stage { align-items: flex-start; }
+  .hook .title { font-size: 84px; line-height: 1.22; color: #0f2a43; }
+  .hook .sub { font-size: 60px; font-weight: 800; color: #0d9488; margin-top: 20px; }
+
+  .point .stage { justify-content: center; }
+
+  .code .card { background: #f0fdfa; border: 3px solid #99f6e4; }
+  .code .title {
+    font-family: Consolas, "D2Coding", monospace;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: #0f766e;
+    word-break: break-all;
+  }
+  .code .sub { font-size: 40px; color: #475569; }
+
+  .compare .title {
+    font-size: 56px;
+    font-weight: 700;
+    color: #dc2626;
+    background: rgba(239, 68, 68, .08);
+    border-left: 10px solid #ef4444;
+    border-radius: 0 24px 24px 0;
+    padding: 36px 36px;
+  }
+  .compare .sub {
+    font-size: 56px;
+    font-weight: 700;
+    color: #16a34a;
+    background: rgba(34, 197, 94, .08);
+    border-left: 10px solid #22c55e;
+    border-radius: 0 24px 24px 0;
+    padding: 36px 36px;
+    margin-top: 28px;
+  }
+
+  .cta .stage { align-items: center; text-align: center; }
+  .cta .title { font-size: 72px; color: #0f2a43; }
+  .cta .sub {
+    font-size: 46px;
+    font-weight: 800;
+    color: #ffffff;
+    background: #14213d;
+    border-radius: 999px;
+    padding: 24px 48px;
+    margin-top: 32px;
+  }
+
+  .empty { display: none; }
+</style>
+
+<body class="{{layout}}">
+  <div class="bg"></div>
+  <div class="daybadge">{{badge}}</div>
+  <div class="stage">
+    <div class="card {{card_empty}}">
+      <div class="num {{num_empty}}">{{num}}</div>
+      <div class="icon {{icon_empty}}">{{icon}}</div>
+      <div class="title {{title_empty}}">{{title}}</div>
+      <div class="sub {{sub_empty}}">{{sub}}</div>
+    </div>
+  </div>
+</body>

@@ -22,6 +22,8 @@ TEMPLATES = {
     "card": ROOT / "templates" / "card.html",   # 밝은 카드뉴스 톤 (day7부터)
 }
 TEMPLATE = TEMPLATES["dark"]  # check_env의 존재 확인용 대표 템플릿
+CAROUSEL_TEMPLATE = ROOT / "templates" / "carousel.html"  # 피드 캐러셀(카드뉴스) 전용, 4:5
+CW, CH = 1080, 1350
 
 # card 테마 point 장면에서 쓰는 인라인 SVG 아이콘. 외부 아이콘 라이브러리 의존 없이 직접 제작
 ICON_SVG = {
@@ -154,23 +156,42 @@ def pick_post(plan, state, force_day=None, now=None):
     return None
 
 
+def pick_carousel_post(plan, state, now=None):
+    """카드뉴스는 릴스와 별도로 state['published_carousel']에 진행 상태를 추적한다.
+    같은 날 릴스가 이미 실패/성공했든 상관없이 독립적으로 재시도할 수 있다.
+    ponytail: 릴스와 달리 밀린 날짜 캐치업은 하지 않는다 — 부가 콘텐츠라 하루 지나면 건너뛰어도 무방."""
+    now = now or dt.datetime.now(KST)
+    today = now.date()
+    done = state.get("published_carousel", {})
+    for p in plan["posts"]:
+        if p["date"] != today.isoformat():
+            continue
+        if str(p["day"]) in done:
+            return None
+        if now >= dt.datetime.fromisoformat(p["publish_at"]) - dt.timedelta(minutes=WINDOW_MIN):
+            return p
+        return None
+    return None
+
+
 # ---------- 2. 장면 렌더링 ----------
 
-def render_scenes(post, outdir):
+def _render_scene_pngs(scenes, tpl_path, width, height, badge, outdir, prefix):
+    """scenes(title/sub/layout/num/icon 리스트)를 주어진 템플릿·크기로 PNG 연속 캡처.
+    릴스 장면(render_scenes)과 카드뉴스 장면(render_carousel)이 이 함수를 공유한다."""
     from playwright.sync_api import sync_playwright
 
-    tpl_path = TEMPLATES.get(post.get("theme", "dark"), TEMPLATES["dark"])
     tpl = tpl_path.read_text(encoding="utf-8")
     paths = []
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
-        page = browser.new_page(viewport={"width": W, "height": H}, device_scale_factor=1)
-        for i, sc in enumerate(post["scenes"]):
+        page = browser.new_page(viewport={"width": width, "height": height}, device_scale_factor=1)
+        for i, sc in enumerate(scenes):
             num = sc.get("num", "")
             icon = ICON_SVG.get(sc.get("icon"), "")
             html_out = (
                 tpl.replace("{{layout}}", sc["layout"])
-                   .replace("{{badge}}", f"DAY {post['day']} / 30")
+                   .replace("{{badge}}", badge)
                    .replace("{{title}}", html.escape(sc["title"]))
                    .replace("{{sub}}", html.escape(sc["sub"]))
                    .replace("{{title_empty}}", "" if sc["title"] else "empty")
@@ -183,11 +204,25 @@ def render_scenes(post, outdir):
                    .replace("{{card_empty}}", "")
             )
             page.set_content(html_out)
-            path = outdir / f"s{i + 1:02d}.png"
+            path = outdir / f"{prefix}{i + 1:02d}.png"
             page.screenshot(path=str(path))
             paths.append(path)
         browser.close()
+    return paths
+
+
+def render_scenes(post, outdir):
+    tpl_path = TEMPLATES.get(post.get("theme", "dark"), TEMPLATES["dark"])
+    paths = _render_scene_pngs(post["scenes"], tpl_path, W, H, f"DAY {post['day']} / 30", outdir, "s")
     log(f"장면 {len(paths)}장 렌더 완료")
+    return paths
+
+
+def render_carousel(post, outdir):
+    """같은 날의 scenes를 카드뉴스(4:5, 피드 캐러셀)용으로 다시 캡처한다.
+    별도 콘텐츠를 새로 쓰지 않고 릴스와 같은 scenes를 재사용 — 콘텐츠 이중 관리를 피한다."""
+    paths = _render_scene_pngs(post["scenes"], CAROUSEL_TEMPLATE, CW, CH, f"DAY {post['day']} / 30", outdir, "c")
+    log(f"카드뉴스 {len(paths)}장 렌더 완료")
     return paths
 
 
@@ -270,19 +305,34 @@ def build_caption(plan, post):
 
 # ---------- 5. 호스팅 ----------
 
-def upload_hosting(video, cover):
+def _cloudinary():
     import cloudinary
-    import cloudinary.uploader
 
     cloudinary.config(
         cloud_name=os.environ["CLOUDINARY_CLOUD_NAME"],
         api_key=os.environ["CLOUDINARY_API_KEY"],
         api_secret=os.environ["CLOUDINARY_API_SECRET"],
     )
+    return cloudinary
+
+
+def upload_hosting(video, cover):
+    import cloudinary.uploader
+
+    _cloudinary()
     v = cloudinary.uploader.upload_large(str(video), resource_type="video", folder="reels")
     c = cloudinary.uploader.upload(str(cover), folder="reels")
     log("Cloudinary 업로드 완료")
     return v["secure_url"], c["secure_url"]
+
+
+def upload_carousel_images(pngs):
+    import cloudinary.uploader
+
+    _cloudinary()
+    urls = [cloudinary.uploader.upload(str(p), folder="cards")["secure_url"] for p in pngs]
+    log(f"카드뉴스 이미지 {len(urls)}장 업로드 완료")
+    return urls
 
 
 # ---------- 6. 게시 ----------
@@ -352,6 +402,46 @@ def publish_reel(video_url, cover_url, caption):
     r.raise_for_status()
     media_id = r.json()["id"]
     log(f"게시 완료: {media_id}")
+    return media_id
+
+
+def publish_carousel(image_urls, caption):
+    """이미지 캐러셀(카드뉴스)을 게시한다. 자식 컨테이너(IMAGE) N개 → 부모 컨테이너(CAROUSEL) → 발행.
+    이미지는 영상과 달리 비동기 인코딩 대기가 필요 없어 publish_reel보다 단순하다."""
+    ig_id, token = os.environ["IG_USER_ID"], os.environ["IG_ACCESS_TOKEN"]
+
+    child_ids = []
+    for url in image_urls:
+        r = requests.post(
+            f"{GRAPH}/{ig_id}/media",
+            data={"image_url": url, "is_carousel_item": "true", "access_token": token},
+            timeout=60,
+        )
+        r.raise_for_status()
+        child_ids.append(r.json()["id"])
+    log(f"카드뉴스 자식 컨테이너 {len(child_ids)}개 생성")
+
+    r = requests.post(
+        f"{GRAPH}/{ig_id}/media",
+        data={
+            "media_type": "CAROUSEL",
+            "children": ",".join(child_ids),
+            "caption": caption,
+            "access_token": token,
+        },
+        timeout=60,
+    )
+    r.raise_for_status()
+    creation_id = r.json()["id"]
+
+    r = requests.post(
+        f"{GRAPH}/{ig_id}/media_publish",
+        data={"creation_id": creation_id, "access_token": token},
+        timeout=60,
+    )
+    r.raise_for_status()
+    media_id = r.json()["id"]
+    log(f"카드뉴스 게시 완료: {media_id}")
     return media_id
 
 
@@ -425,6 +515,9 @@ def check_env():
         if not path.exists():
             print(f"templates/{path.name} ({name}): MISSING")
             ok = False
+    if not CAROUSEL_TEMPLATE.exists():
+        print(f"templates/{CAROUSEL_TEMPLATE.name} (carousel): MISSING")
+        ok = False
 
     missing_bgm = [b for b in json.loads(PLAN.read_text(encoding="utf-8"))["meta"]["bgm_pool"]
                    if not (BGM_DIR / f"{b}.mp3").exists()]
@@ -454,39 +547,67 @@ def main():
     try:
         plan = json.loads(PLAN.read_text(encoding="utf-8"))
         state = load_state()
+        failed = False
 
+        # 1) 릴스 (영상)
         post = pick_post(plan, state, args.day)
-        if not post:
-            return 0
+        if post:
+            log(f"day{post['day']} 릴스 시작 — {post['topic']}")
+            outdir = OUT / f"day{post['day']:02d}"
+            outdir.mkdir(parents=True, exist_ok=True)
+            try:
+                pngs = render_scenes(post, outdir)
+                video = build_video(post, pngs, outdir)
+                caption = build_caption(plan, post)
 
-        log(f"day{post['day']} 시작 — {post['topic']}")
-        outdir = OUT / f"day{post['day']:02d}"
-        outdir.mkdir(parents=True, exist_ok=True)
+                if args.dry_run:
+                    log(f"dry-run 종료(릴스). {video}")
+                else:
+                    video_url, cover_url = upload_hosting(video, pngs[post["cover_scene"]])
+                    media_id = publish_reel(video_url, cover_url, caption)
+                    state["published"][str(post["day"])] = {
+                        "at": dt.datetime.now(KST).isoformat(),
+                        "media_id": media_id,
+                        "topic": post["topic"],
+                    }
+                    save_state(state)
+            except Exception as e:
+                failed = True
+                log(f"릴스 실패: {e}")
+                notify(f"[인스타 자동화] day{post['day']} 릴스 실패\n{type(e).__name__}: {e}")
 
-        try:
-            pngs = render_scenes(post, outdir)
-            video = build_video(post, pngs, outdir)
-            caption = build_caption(plan, post)
+        # 2) 카드뉴스 (피드 캐러셀) — 릴스와 별개 항목/상태이므로 릴스 실패 여부와 무관하게 시도한다
+        if args.day:  # --day는 테스트용 강제 실행 — 카드뉴스도 같은 day로 강제한다
+            cpost = next((p for p in plan["posts"] if p["day"] == args.day), None)
+        else:
+            cpost = pick_carousel_post(plan, state, dt.datetime.now(KST))
+        if cpost:
+            log(f"day{cpost['day']} 카드뉴스 시작 — {cpost['topic']}")
+            coutdir = OUT / f"day{cpost['day']:02d}" / "cards"
+            coutdir.mkdir(parents=True, exist_ok=True)
+            try:
+                cpngs = render_carousel(cpost, coutdir)
+                caption = build_caption(plan, cpost)
 
-            if args.dry_run:
-                log(f"dry-run 종료. {video}")
-                return 0
+                if args.dry_run:
+                    log(f"dry-run 종료(카드뉴스). {coutdir}")
+                else:
+                    urls = upload_carousel_images(cpngs)
+                    media_id = publish_carousel(urls, caption)
+                    state.setdefault("published_carousel", {})[str(cpost["day"])] = {
+                        "at": dt.datetime.now(KST).isoformat(),
+                        "media_id": media_id,
+                        "topic": cpost["topic"],
+                    }
+                    save_state(state)
+            except Exception as e:
+                failed = True
+                log(f"카드뉴스 실패: {e}")
+                notify(f"[인스타 자동화] day{cpost['day']} 카드뉴스 실패\n{type(e).__name__}: {e}")
 
-            video_url, cover_url = upload_hosting(video, pngs[post["cover_scene"]])
-            media_id = publish_reel(video_url, cover_url, caption)
-
-            state["published"][str(post["day"])] = {
-                "at": dt.datetime.now(KST).isoformat(),
-                "media_id": media_id,
-                "topic": post["topic"],
-            }
-            save_state(state)
-            return 0
-
-        except Exception as e:
-            log(f"실패: {e}")
-            notify(f"[인스타 자동화] day{post['day']} 실패\n{type(e).__name__}: {e}")
-            return 1
+        if not post and not cpost:
+            log("게시할 항목 없음. 종료")
+        return 1 if failed else 0
     finally:
         release_lock()
 
