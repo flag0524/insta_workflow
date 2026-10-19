@@ -166,6 +166,8 @@ def pick_carousel_post(plan, state, now=None):
     for p in plan["posts"]:
         if p["date"] != today.isoformat():
             continue
+        if p.get("carousel") is False:  # 피드(카드뉴스)는 별도 방침(공공기관 AI 단일 주제)이라 릴스 전용 항목은 건너뜀
+            return None
         if str(p["day"]) in done:
             return None
         if now >= dt.datetime.fromisoformat(p["publish_at"]) - dt.timedelta(minutes=WINDOW_MIN):

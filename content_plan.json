@@ -40,8 +40,8 @@
           15,
           15
         ],
-        "count": 19,
-        "goal": "15초 공식(훅-파라독스-3컷-비포애프터-CTA)"
+        "count": 20,
+        "goal": "15초 공식"
       },
       "loop": {
         "range_sec": [
@@ -80,7 +80,8 @@
       "code",
       "compare",
       "cta"
-    ]
+    ],
+    "rotation": "기술스택→트렌드→자동화 (날짜 index%3), 릴스 전용(카드뉴스 비활성)"
   },
   "hashtag_sets": {
     "A": {
@@ -175,7 +176,7 @@
       "weekday": "화",
       "publish_at": "2026-10-20T20:00:00+09:00",
       "week": 1,
-      "week_theme": "에이전트 입문",
+      "week_theme": "기술스택",
       "pillar": "교육",
       "tier": "info",
       "duration_sec": 30,
@@ -234,15 +235,110 @@
       ],
       "caption": "AI가 매번 다르게 코딩한다면 규칙이 없는 겁니다.\n\n프로젝트 루트에 CLAUDE.md 한 장을 두세요.\n지켜야 할 규칙, 하지 말아야 할 것, 코드 스타일.\n이 세 가지만 적어도 결과가 달라집니다.\n길게 쓸 필요 없습니다. 열 줄이면 시작됩니다.\n\n저장해두고 오늘 하나만 적어보세요.",
       "content_type": "서브편",
-      "badge": "DAY 1 / 30"
+      "badge": "DAY 1 / 30",
+      "axis": "기술스택",
+      "carousel": false
     },
     {
-      "day": 20,
+      "day": 40,
       "date": "2026-10-21",
       "weekday": "수",
       "publish_at": "2026-10-21T20:00:00+09:00",
       "week": 1,
-      "week_theme": "에이전트 입문",
+      "week_theme": "트렌드",
+      "pillar": "교육",
+      "content_type": "본편",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "AI 뉴스 3줄로 읽는 법",
+      "hook_type": "H3",
+      "loop_type": "cta_end",
+      "cover_scene": 1,
+      "bgm": "upbeat_lofi_02",
+      "hashtag_set": "A",
+      "scenes": [
+        {
+          "t": [
+            0,
+            1
+          ],
+          "layout": "hook",
+          "title": "3줄",
+          "sub": ""
+        },
+        {
+          "t": [
+            1,
+            3
+          ],
+          "layout": "hook",
+          "title": "AI 뉴스 따라가기",
+          "sub": "3줄이면 됩니다"
+        },
+        {
+          "t": [
+            3,
+            6
+          ],
+          "layout": "point",
+          "title": "무엇이 나왔나",
+          "sub": "한 줄로 요약",
+          "num": "01",
+          "icon": "file"
+        },
+        {
+          "t": [
+            6,
+            9
+          ],
+          "layout": "point",
+          "title": "내게 쓸모 있나",
+          "sub": "내 업무에 대입",
+          "num": "02",
+          "icon": "checklist"
+        },
+        {
+          "t": [
+            9,
+            12
+          ],
+          "layout": "point",
+          "title": "오늘 써볼 것",
+          "sub": "하나만 직접 실행",
+          "num": "03",
+          "icon": "link"
+        },
+        {
+          "t": [
+            12,
+            14
+          ],
+          "layout": "compare",
+          "title": "❌ 뉴스 전부 읽기",
+          "sub": "✅ 3줄만 읽기"
+        },
+        {
+          "t": [
+            14,
+            15
+          ],
+          "layout": "cta",
+          "title": "저장하고 따라하기",
+          "sub": ""
+        }
+      ],
+      "caption": "AI 뉴스, 다 읽으면 따라갈 수 없습니다.\n\n무엇이 나왔는지 한 줄, 내 업무에 쓸모 있는지 한 줄, 오늘 써볼 것 한 줄.\n이 세 줄만 적으면 충분합니다.\n중요한 건 읽는 양이 아니라 오늘 하나라도 직접 써보는 것이에요.\n\n저장해두고 내일 뉴스부터 적용해보세요.",
+      "badge": "DAY 2 / 30",
+      "axis": "트렌드",
+      "carousel": false
+    },
+    {
+      "day": 20,
+      "date": "2026-10-22",
+      "weekday": "목",
+      "publish_at": "2026-10-22T20:00:00+09:00",
+      "week": 1,
+      "week_theme": "자동화",
       "pillar": "교육",
       "tier": "loop",
       "duration_sec": 12,
@@ -292,15 +388,17 @@
       ],
       "caption": "퇴근 전 딱 15분만 쓰세요. 내일이 달라집니다.\n\n1. 이번 달에 반복했던 업무를 종이에 다 적기\n2. 각각 걸린 시간 × 한 달 빈도를 계산하기\n3. 숫자가 제일 큰 것 하나만 고르기\n\n내일부터 그 하나만 없애면 됩니다. 전부 다 하려다 아무것도 못 합니다.\n\n저장해두고 퇴근 전에 해보세요.",
       "content_type": "본편",
-      "badge": "DAY 2 / 30"
+      "badge": "DAY 3 / 30",
+      "axis": "자동화",
+      "carousel": false
     },
     {
       "day": 31,
-      "date": "2026-10-22",
-      "weekday": "목",
-      "publish_at": "2026-10-22T20:00:00+09:00",
+      "date": "2026-10-23",
+      "weekday": "금",
+      "publish_at": "2026-10-23T20:00:00+09:00",
       "week": 1,
-      "week_theme": "에이전트 입문",
+      "week_theme": "기술스택",
       "pillar": "교육",
       "content_type": "본편",
       "tier": "reel15",
@@ -383,817 +481,110 @@
         }
       ],
       "caption": "MCP 서버 연결, 5분이면 끝납니다.\n\n설치는 npx 한 줄. 설정 파일에 서버를 등록하고 재시작하면 도구 목록에 바로 뜹니다.\n그다음부터는 파일 내용을 붙여넣을 필요가 없어요. 경로만 알려주면 AI가 직접 읽습니다.\n처음에는 읽기 전용 폴더 하나만 연결하세요. 권한은 좁게 시작하는 게 안전합니다.\n\n저장해두고 오늘 하나만 연결해보세요.",
-      "badge": "DAY 3 / 30"
+      "badge": "DAY 4 / 30",
+      "axis": "기술스택",
+      "carousel": false
     },
     {
-      "day": 32,
-      "date": "2026-10-23",
-      "weekday": "금",
-      "publish_at": "2026-10-23T20:00:00+09:00",
-      "week": 1,
-      "week_theme": "에이전트 입문",
-      "pillar": "교육",
-      "content_type": "A/B변형",
-      "tier": "reel15",
-      "duration_sec": 15,
-      "topic": "MCP 서버 5분 연결 (훅 B)",
-      "hook_type": "H4",
-      "loop_type": "cta_end",
-      "cover_scene": 1,
-      "bgm": "upbeat_lofi_02",
-      "hashtag_set": "A",
-      "scenes": [
-        {
-          "t": [
-            0,
-            1
-          ],
-          "layout": "hook",
-          "title": "복붙",
-          "sub": ""
-        },
-        {
-          "t": [
-            1,
-            3
-          ],
-          "layout": "hook",
-          "title": "아직도",
-          "sub": "복붙하세요?"
-        },
-        {
-          "t": [
-            3,
-            6
-          ],
-          "layout": "point",
-          "title": "서버 설치",
-          "sub": "npx 한 줄이면 끝",
-          "num": "01",
-          "icon": "file"
-        },
-        {
-          "t": [
-            6,
-            9
-          ],
-          "layout": "point",
-          "title": "설정에 등록",
-          "sub": "mcpServers에 추가",
-          "num": "02",
-          "icon": "checklist"
-        },
-        {
-          "t": [
-            9,
-            12
-          ],
-          "layout": "point",
-          "title": "재시작 후 확인",
-          "sub": "도구 목록에 뜸",
-          "num": "03",
-          "icon": "link"
-        },
-        {
-          "t": [
-            12,
-            14
-          ],
-          "layout": "compare",
-          "title": "❌ 파일 붙여넣기",
-          "sub": "✅ 경로만 알려주기"
-        },
-        {
-          "t": [
-            14,
-            15
-          ],
-          "layout": "cta",
-          "title": "저장하고 따라하기",
-          "sub": ""
-        }
-      ],
-      "caption": "아직도 파일을 복붙하고 계신가요? MCP 서버 연결, 5분이면 끝납니다.\n\n설치는 npx 한 줄. 설정 파일에 서버를 등록하고 재시작하면 도구 목록에 바로 뜹니다.\n그다음부터는 파일 내용을 붙여넣을 필요가 없어요. 경로만 알려주면 AI가 직접 읽습니다.\n처음에는 읽기 전용 폴더 하나만 연결하세요. 권한은 좁게 시작하는 게 안전합니다.\n\n저장해두고 오늘 하나만 연결해보세요.",
-      "badge": "DAY 4 / 30"
-    },
-    {
-      "day": 33,
+      "day": 41,
       "date": "2026-10-24",
       "weekday": "토",
       "publish_at": "2026-10-24T20:00:00+09:00",
       "week": 1,
-      "week_theme": "에이전트 입문",
-      "pillar": "사례",
-      "content_type": "하이라이트",
-      "tier": "info",
-      "duration_sec": 22,
-      "topic": "이번 주 에이전트 입문 하이라이트",
-      "hook_type": "H5",
+      "week_theme": "트렌드",
+      "pillar": "교육",
+      "content_type": "A/B변형",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "AI 뉴스 3줄로 읽는 법 (훅 B)",
+      "hook_type": "H3",
       "loop_type": "cta_end",
-      "cover_scene": 0,
+      "cover_scene": 1,
       "bgm": "minimal_pulse_03",
       "hashtag_set": "A",
       "scenes": [
         {
           "t": [
             0,
+            1
+          ],
+          "layout": "hook",
+          "title": "못 따라감",
+          "sub": ""
+        },
+        {
+          "t": [
+            1,
             3
           ],
           "layout": "hook",
-          "title": "이번 주 에이전트 입문",
-          "sub": "3줄 요약"
+          "title": "뉴스 다 읽다간",
+          "sub": "못 따라갑니다"
         },
         {
           "t": [
             3,
-            8
+            6
           ],
           "layout": "point",
-          "title": "규칙 파일",
-          "sub": "CLAUDE.md 한 장",
-          "num": "01"
+          "title": "무엇이 나왔나",
+          "sub": "한 줄로 요약",
+          "num": "01",
+          "icon": "file"
         },
         {
           "t": [
-            8,
-            13
+            6,
+            9
           ],
           "layout": "point",
-          "title": "체크리스트",
-          "sub": "자동화 후보 고르기",
-          "num": "02"
+          "title": "내게 쓸모 있나",
+          "sub": "내 업무에 대입",
+          "num": "02",
+          "icon": "checklist"
         },
         {
           "t": [
-            13,
-            18
+            9,
+            12
           ],
           "layout": "point",
-          "title": "MCP 연결",
-          "sub": "경로만 알려주기",
-          "num": "03"
+          "title": "오늘 써볼 것",
+          "sub": "하나만 직접 실행",
+          "num": "03",
+          "icon": "link"
         },
         {
           "t": [
-            18,
-            22
+            12,
+            14
+          ],
+          "layout": "compare",
+          "title": "❌ 뉴스 전부 읽기",
+          "sub": "✅ 3줄만 읽기"
+        },
+        {
+          "t": [
+            14,
+            15
           ],
           "layout": "cta",
-          "title": "저장해두세요",
+          "title": "저장하고 따라하기",
           "sub": ""
         }
       ],
-      "caption": "이번 주 에이전트 입문 정리했습니다.\n\n1) 규칙 파일: CLAUDE.md로 실수 방지\n2) 체크리스트: 자동화 후보 고르기\n3) MCP 연결: 경로만 알려주기\n\n놓친 게 있다면 저장하고 하나씩 보세요.",
-      "badge": "DAY 5 / 30"
+      "caption": "AI 뉴스, 다 읽다간 못 따라갑니다. 3줄만 적으세요.\n\n무엇이 나왔는지 한 줄, 내 업무에 쓸모 있는지 한 줄, 오늘 써볼 것 한 줄.\n이 세 줄만 적으면 충분합니다.\n중요한 건 읽는 양이 아니라 오늘 하나라도 직접 써보는 것이에요.\n\n저장해두고 내일 뉴스부터 적용해보세요.",
+      "badge": "DAY 5 / 30",
+      "axis": "트렌드",
+      "carousel": false
     },
     {
-      "day": 34,
+      "day": 50,
       "date": "2026-10-25",
       "weekday": "일",
       "publish_at": "2026-10-25T20:00:00+09:00",
       "week": 1,
-      "week_theme": "에이전트 입문",
-      "pillar": "참여",
-      "content_type": "예고",
-      "tier": "loop",
-      "duration_sec": 12,
-      "topic": "다음 주 예고: RAG 실전",
-      "hook_type": "H5",
-      "loop_type": "seamless",
-      "cover_scene": 0,
-      "bgm": "warm_acoustic_04",
-      "hashtag_set": "A",
-      "scenes": [
-        {
-          "t": [
-            0,
-            3
-          ],
-          "layout": "hook",
-          "title": "다음 주",
-          "sub": "RAG 실전"
-        },
-        {
-          "t": [
-            3,
-            6
-          ],
-          "layout": "point",
-          "title": "청킹 실수 TOP3",
-          "sub": "틀리는 이유"
-        },
-        {
-          "t": [
-            6,
-            9
-          ],
-          "layout": "point",
-          "title": "하이브리드 검색",
-          "sub": "키워드 + 벡터"
-        },
-        {
-          "t": [
-            9,
-            12
-          ],
-          "layout": "cta",
-          "title": "팔로우하고 보세요",
-          "sub": ""
-        }
-      ],
-      "caption": "다음 주는 RAG 실전입니다.\n\n청킹 실수 TOP3: 틀리는 이유\n하이브리드 검색: 키워드 + 벡터\n\n팔로우하면 놓치지 않아요.",
-      "badge": "DAY 6 / 30"
-    },
-    {
-      "day": 35,
-      "date": "2026-10-26",
-      "weekday": "월",
-      "publish_at": "2026-10-26T20:00:00+09:00",
-      "week": 2,
-      "week_theme": "RAG 실전",
-      "pillar": "교육",
-      "content_type": "본편",
-      "tier": "reel15",
-      "duration_sec": 15,
-      "topic": "RAG 청킹 실수 TOP3",
-      "hook_type": "H3",
-      "loop_type": "cta_end",
-      "cover_scene": 1,
-      "bgm": "calm_tech_01",
-      "hashtag_set": "A",
-      "scenes": [
-        {
-          "t": [
-            0,
-            1
-          ],
-          "layout": "hook",
-          "title": "TOP3",
-          "sub": ""
-        },
-        {
-          "t": [
-            1,
-            3
-          ],
-          "layout": "hook",
-          "title": "RAG가 틀리는 이유",
-          "sub": "대부분 청킹입니다"
-        },
-        {
-          "t": [
-            3,
-            6
-          ],
-          "layout": "point",
-          "title": "너무 크게 자름",
-          "sub": "문맥이 섞여 검색 실패",
-          "num": "01",
-          "icon": "file"
-        },
-        {
-          "t": [
-            6,
-            9
-          ],
-          "layout": "point",
-          "title": "너무 잘게 자름",
-          "sub": "의미가 끊겨 오답",
-          "num": "02",
-          "icon": "checklist"
-        },
-        {
-          "t": [
-            9,
-            12
-          ],
-          "layout": "point",
-          "title": "겹침이 0",
-          "sub": "경계 문장이 사라짐",
-          "num": "03",
-          "icon": "link"
-        },
-        {
-          "t": [
-            12,
-            14
-          ],
-          "layout": "compare",
-          "title": "❌ 글자 수로 자르기",
-          "sub": "✅ 문단 기준으로 자르기"
-        },
-        {
-          "t": [
-            14,
-            15
-          ],
-          "layout": "cta",
-          "title": "저장하고 따라하기",
-          "sub": ""
-        }
-      ],
-      "caption": "RAG 답이 틀린다면 청킹부터 의심하세요.\n\n첫째, 너무 크게 자르면 문맥이 섞여서 엉뚱한 조각이 검색됩니다.\n둘째, 너무 잘게 자르면 의미가 끊겨서 AI가 그럴듯하게 틀립니다.\n셋째, 겹침이 0이면 경계에 걸친 문장이 통째로 사라집니다.\n글자 수 대신 문단 기준으로 자르고, 앞뒤를 조금 겹치게 해보세요.\n\n저장해두고 내 RAG에 대입해보세요.",
-      "badge": "DAY 7 / 30"
-    },
-    {
-      "day": 36,
-      "date": "2026-10-27",
-      "weekday": "화",
-      "publish_at": "2026-10-27T20:00:00+09:00",
-      "week": 2,
-      "week_theme": "RAG 실전",
-      "pillar": "교육",
-      "content_type": "A/B변형",
-      "tier": "reel15",
-      "duration_sec": 15,
-      "topic": "RAG 청킹 실수 TOP3 (훅 B)",
-      "hook_type": "H4",
-      "loop_type": "cta_end",
-      "cover_scene": 1,
-      "bgm": "upbeat_lofi_02",
-      "hashtag_set": "A",
-      "scenes": [
-        {
-          "t": [
-            0,
-            1
-          ],
-          "layout": "hook",
-          "title": "검색은 OK",
-          "sub": ""
-        },
-        {
-          "t": [
-            1,
-            3
-          ],
-          "layout": "hook",
-          "title": "검색은 되는데",
-          "sub": "답이 틀리면?"
-        },
-        {
-          "t": [
-            3,
-            6
-          ],
-          "layout": "point",
-          "title": "너무 크게 자름",
-          "sub": "문맥이 섞여 검색 실패",
-          "num": "01",
-          "icon": "file"
-        },
-        {
-          "t": [
-            6,
-            9
-          ],
-          "layout": "point",
-          "title": "너무 잘게 자름",
-          "sub": "의미가 끊겨 오답",
-          "num": "02",
-          "icon": "checklist"
-        },
-        {
-          "t": [
-            9,
-            12
-          ],
-          "layout": "point",
-          "title": "겹침이 0",
-          "sub": "경계 문장이 사라짐",
-          "num": "03",
-          "icon": "link"
-        },
-        {
-          "t": [
-            12,
-            14
-          ],
-          "layout": "compare",
-          "title": "❌ 글자 수로 자르기",
-          "sub": "✅ 문단 기준으로 자르기"
-        },
-        {
-          "t": [
-            14,
-            15
-          ],
-          "layout": "cta",
-          "title": "저장하고 따라하기",
-          "sub": ""
-        }
-      ],
-      "caption": "검색은 되는데 답이 틀리다면, 범인은 청킹입니다.\n\n첫째, 너무 크게 자르면 문맥이 섞여서 엉뚱한 조각이 검색됩니다.\n둘째, 너무 잘게 자르면 의미가 끊겨서 AI가 그럴듯하게 틀립니다.\n셋째, 겹침이 0이면 경계에 걸친 문장이 통째로 사라집니다.\n글자 수 대신 문단 기준으로 자르고, 앞뒤를 조금 겹치게 해보세요.\n\n저장해두고 내 RAG에 대입해보세요.",
-      "badge": "DAY 8 / 30"
-    },
-    {
-      "day": 37,
-      "date": "2026-10-28",
-      "weekday": "수",
-      "publish_at": "2026-10-28T20:00:00+09:00",
-      "week": 2,
-      "week_theme": "RAG 실전",
-      "pillar": "교육",
-      "content_type": "서브편",
-      "tier": "reel15",
-      "duration_sec": 15,
-      "topic": "하이브리드 검색: 키워드+벡터 (실전 활용편)",
-      "hook_type": "H1",
-      "loop_type": "cta_end",
-      "cover_scene": 1,
-      "bgm": "minimal_pulse_03",
-      "hashtag_set": "A",
-      "scenes": [
-        {
-          "t": [
-            0,
-            1
-          ],
-          "layout": "hook",
-          "title": "2개",
-          "sub": ""
-        },
-        {
-          "t": [
-            1,
-            3
-          ],
-          "layout": "hook",
-          "title": "키워드와 벡터",
-          "sub": "같이 쓰세요"
-        },
-        {
-          "t": [
-            3,
-            6
-          ],
-          "layout": "point",
-          "title": "벡터만 쓰면",
-          "sub": "고유명사를 놓침",
-          "num": "01",
-          "icon": "file"
-        },
-        {
-          "t": [
-            6,
-            9
-          ],
-          "layout": "point",
-          "title": "키워드만 쓰면",
-          "sub": "동의어를 놓침",
-          "num": "02",
-          "icon": "checklist"
-        },
-        {
-          "t": [
-            9,
-            12
-          ],
-          "layout": "point",
-          "title": "점수를 합치기",
-          "sub": "RRF로 순위 병합",
-          "num": "03",
-          "icon": "link"
-        },
-        {
-          "t": [
-            12,
-            14
-          ],
-          "layout": "compare",
-          "title": "❌ 한 가지로 검색",
-          "sub": "✅ 두 가지를 합치기"
-        },
-        {
-          "t": [
-            14,
-            15
-          ],
-          "layout": "cta",
-          "title": "저장하고 따라하기",
-          "sub": ""
-        }
-      ],
-      "caption": "검색 방식이 하나면 반드시 놓치는 게 생깁니다.\n\n벡터 검색은 의미는 잘 잡지만 제품명이나 법령 번호 같은 고유명사를 놓칩니다.\n키워드 검색은 정확하지만 비슷한 표현을 못 찾습니다.\n둘을 같이 돌리고 순위를 합치면(RRF) 서로의 빈틈을 메워요.\n\n저장해두고 검색 파이프라인에 적용해보세요.",
-      "badge": "DAY 9 / 30"
-    },
-    {
-      "day": 38,
-      "date": "2026-10-29",
-      "weekday": "목",
-      "publish_at": "2026-10-29T20:00:00+09:00",
-      "week": 2,
-      "week_theme": "RAG 실전",
-      "pillar": "교육",
-      "content_type": "A/B변형",
-      "tier": "reel15",
-      "duration_sec": 15,
-      "topic": "하이브리드 검색 (훅 B)",
-      "hook_type": "H4",
-      "loop_type": "cta_end",
-      "cover_scene": 1,
-      "bgm": "warm_acoustic_04",
-      "hashtag_set": "A",
-      "scenes": [
-        {
-          "t": [
-            0,
-            1
-          ],
-          "layout": "hook",
-          "title": "엉뚱",
-          "sub": ""
-        },
-        {
-          "t": [
-            1,
-            3
-          ],
-          "layout": "hook",
-          "title": "검색이 자꾸",
-          "sub": "엉뚱하다면?"
-        },
-        {
-          "t": [
-            3,
-            6
-          ],
-          "layout": "point",
-          "title": "벡터만 쓰면",
-          "sub": "고유명사를 놓침",
-          "num": "01",
-          "icon": "file"
-        },
-        {
-          "t": [
-            6,
-            9
-          ],
-          "layout": "point",
-          "title": "키워드만 쓰면",
-          "sub": "동의어를 놓침",
-          "num": "02",
-          "icon": "checklist"
-        },
-        {
-          "t": [
-            9,
-            12
-          ],
-          "layout": "point",
-          "title": "점수를 합치기",
-          "sub": "RRF로 순위 병합",
-          "num": "03",
-          "icon": "link"
-        },
-        {
-          "t": [
-            12,
-            14
-          ],
-          "layout": "compare",
-          "title": "❌ 한 가지로 검색",
-          "sub": "✅ 두 가지를 합치기"
-        },
-        {
-          "t": [
-            14,
-            15
-          ],
-          "layout": "cta",
-          "title": "저장하고 따라하기",
-          "sub": ""
-        }
-      ],
-      "caption": "검색이 자꾸 엉뚱하다면 방식이 하나라서입니다.\n\n벡터 검색은 의미는 잘 잡지만 제품명이나 법령 번호 같은 고유명사를 놓칩니다.\n키워드 검색은 정확하지만 비슷한 표현을 못 찾습니다.\n둘을 같이 돌리고 순위를 합치면(RRF) 서로의 빈틈을 메워요.\n\n저장해두고 검색 파이프라인에 적용해보세요.",
-      "badge": "DAY 10 / 30"
-    },
-    {
-      "day": 39,
-      "date": "2026-10-30",
-      "weekday": "금",
-      "publish_at": "2026-10-30T20:00:00+09:00",
-      "week": 2,
-      "week_theme": "RAG 실전",
-      "pillar": "교육",
-      "content_type": "본편",
-      "tier": "reel15",
-      "duration_sec": 15,
-      "topic": "RAG 평가: RAGAS 점수로 확인",
-      "hook_type": "H2",
-      "loop_type": "cta_end",
-      "cover_scene": 1,
-      "bgm": "calm_tech_01",
-      "hashtag_set": "A",
-      "scenes": [
-        {
-          "t": [
-            0,
-            1
-          ],
-          "layout": "hook",
-          "title": "점수",
-          "sub": ""
-        },
-        {
-          "t": [
-            1,
-            3
-          ],
-          "layout": "hook",
-          "title": "RAG 좋아졌나요?",
-          "sub": "숫자로 확인하세요"
-        },
-        {
-          "t": [
-            3,
-            6
-          ],
-          "layout": "point",
-          "title": "질문 20개 준비",
-          "sub": "정답 기준을 적기",
-          "num": "01",
-          "icon": "file"
-        },
-        {
-          "t": [
-            6,
-            9
-          ],
-          "layout": "point",
-          "title": "RAGAS로 채점",
-          "sub": "충실도 · 관련성",
-          "num": "02",
-          "icon": "checklist"
-        },
-        {
-          "t": [
-            9,
-            12
-          ],
-          "layout": "point",
-          "title": "수정 전후 비교",
-          "sub": "점수가 오르면 채택",
-          "num": "03",
-          "icon": "link"
-        },
-        {
-          "t": [
-            12,
-            14
-          ],
-          "layout": "compare",
-          "title": "❌ 느낌으로 판단",
-          "sub": "✅ 점수로 판단"
-        },
-        {
-          "t": [
-            14,
-            15
-          ],
-          "layout": "cta",
-          "title": "저장하고 따라하기",
-          "sub": ""
-        }
-      ],
-      "caption": "RAG를 고쳤는데 좋아졌는지 어떻게 아세요?\n\n질문 20개와 정답 기준을 먼저 적어두세요.\nRAGAS 같은 평가 도구로 충실도와 관련성 점수를 매깁니다.\n수정 전후를 비교해서 점수가 오른 변경만 채택하세요.\n\n저장해두고 다음 수정 때 써보세요.",
-      "badge": "DAY 11 / 30"
-    },
-    {
-      "day": 40,
-      "date": "2026-10-31",
-      "weekday": "토",
-      "publish_at": "2026-10-31T20:00:00+09:00",
-      "week": 2,
-      "week_theme": "RAG 실전",
-      "pillar": "사례",
-      "content_type": "하이라이트",
-      "tier": "info",
-      "duration_sec": 22,
-      "topic": "이번 주 RAG 실전 하이라이트",
-      "hook_type": "H5",
-      "loop_type": "cta_end",
-      "cover_scene": 0,
-      "bgm": "upbeat_lofi_02",
-      "hashtag_set": "A",
-      "scenes": [
-        {
-          "t": [
-            0,
-            3
-          ],
-          "layout": "hook",
-          "title": "이번 주 RAG 실전",
-          "sub": "3줄 요약"
-        },
-        {
-          "t": [
-            3,
-            8
-          ],
-          "layout": "point",
-          "title": "청킹",
-          "sub": "문단 기준 + 겹침",
-          "num": "01"
-        },
-        {
-          "t": [
-            8,
-            13
-          ],
-          "layout": "point",
-          "title": "하이브리드 검색",
-          "sub": "키워드 + 벡터 합치기",
-          "num": "02"
-        },
-        {
-          "t": [
-            13,
-            18
-          ],
-          "layout": "point",
-          "title": "평가",
-          "sub": "RAGAS로 점수 확인",
-          "num": "03"
-        },
-        {
-          "t": [
-            18,
-            22
-          ],
-          "layout": "cta",
-          "title": "저장해두세요",
-          "sub": ""
-        }
-      ],
-      "caption": "이번 주 RAG 실전 정리했습니다.\n\n1) 청킹: 문단 기준 + 겹침\n2) 하이브리드 검색: 키워드 + 벡터 합치기\n3) 평가: RAGAS로 점수 확인\n\n놓친 게 있다면 저장하고 하나씩 보세요.",
-      "badge": "DAY 12 / 30"
-    },
-    {
-      "day": 41,
-      "date": "2026-11-01",
-      "weekday": "일",
-      "publish_at": "2026-11-01T20:00:00+09:00",
-      "week": 2,
-      "week_theme": "RAG 실전",
-      "pillar": "참여",
-      "content_type": "예고",
-      "tier": "loop",
-      "duration_sec": 12,
-      "topic": "다음 주 예고: n8n 자동화 챌린지",
-      "hook_type": "H5",
-      "loop_type": "seamless",
-      "cover_scene": 0,
-      "bgm": "minimal_pulse_03",
-      "hashtag_set": "B",
-      "scenes": [
-        {
-          "t": [
-            0,
-            3
-          ],
-          "layout": "hook",
-          "title": "다음 주",
-          "sub": "n8n 챌린지"
-        },
-        {
-          "t": [
-            3,
-            6
-          ],
-          "layout": "point",
-          "title": "슬랙 요약",
-          "sub": "Day 2"
-        },
-        {
-          "t": [
-            6,
-            9
-          ],
-          "layout": "point",
-          "title": "아침 브리핑",
-          "sub": "Day 3"
-        },
-        {
-          "t": [
-            9,
-            12
-          ],
-          "layout": "cta",
-          "title": "팔로우하고 보세요",
-          "sub": ""
-        }
-      ],
-      "caption": "다음 주는 n8n 챌린지입니다.\n\n슬랙 요약: Day 2\n아침 브리핑: Day 3\n\n팔로우하면 놓치지 않아요.",
-      "badge": "DAY 13 / 30"
-    },
-    {
-      "day": 42,
-      "date": "2026-11-02",
-      "weekday": "월",
-      "publish_at": "2026-11-02T20:00:00+09:00",
-      "week": 3,
-      "week_theme": "n8n 자동화 챌린지",
+      "week_theme": "자동화",
       "pillar": "교육",
       "content_type": "본편",
       "tier": "reel15",
@@ -1276,15 +667,203 @@
         }
       ],
       "caption": "[30일 자동화 챌린지 Day 2] 슬랙 메시지 AI 요약\n\n채널에 새 글이 올라오면 n8n이 감지합니다.\nAI 노드가 세 줄로 요약하고, 매일 아침 메일로 보내줍니다.\n읽는 시간이 줄어드는 건 물론이고 놓치는 공지도 없어져요.\n\n저장해두고 오늘 하나 만들어보세요.",
-      "badge": "DAY 14 / 30"
+      "badge": "DAY 6 / 30",
+      "axis": "자동화",
+      "carousel": false
     },
     {
-      "day": 43,
-      "date": "2026-11-03",
+      "day": 32,
+      "date": "2026-10-26",
+      "weekday": "월",
+      "publish_at": "2026-10-26T20:00:00+09:00",
+      "week": 1,
+      "week_theme": "기술스택",
+      "pillar": "교육",
+      "content_type": "A/B변형",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "MCP 서버 5분 연결 (훅 B)",
+      "hook_type": "H4",
+      "loop_type": "cta_end",
+      "cover_scene": 1,
+      "bgm": "upbeat_lofi_02",
+      "hashtag_set": "A",
+      "scenes": [
+        {
+          "t": [
+            0,
+            1
+          ],
+          "layout": "hook",
+          "title": "복붙",
+          "sub": ""
+        },
+        {
+          "t": [
+            1,
+            3
+          ],
+          "layout": "hook",
+          "title": "아직도",
+          "sub": "복붙하세요?"
+        },
+        {
+          "t": [
+            3,
+            6
+          ],
+          "layout": "point",
+          "title": "서버 설치",
+          "sub": "npx 한 줄이면 끝",
+          "num": "01",
+          "icon": "file"
+        },
+        {
+          "t": [
+            6,
+            9
+          ],
+          "layout": "point",
+          "title": "설정에 등록",
+          "sub": "mcpServers에 추가",
+          "num": "02",
+          "icon": "checklist"
+        },
+        {
+          "t": [
+            9,
+            12
+          ],
+          "layout": "point",
+          "title": "재시작 후 확인",
+          "sub": "도구 목록에 뜸",
+          "num": "03",
+          "icon": "link"
+        },
+        {
+          "t": [
+            12,
+            14
+          ],
+          "layout": "compare",
+          "title": "❌ 파일 붙여넣기",
+          "sub": "✅ 경로만 알려주기"
+        },
+        {
+          "t": [
+            14,
+            15
+          ],
+          "layout": "cta",
+          "title": "저장하고 따라하기",
+          "sub": ""
+        }
+      ],
+      "caption": "아직도 파일을 복붙하고 계신가요? MCP 서버 연결, 5분이면 끝납니다.\n\n설치는 npx 한 줄. 설정 파일에 서버를 등록하고 재시작하면 도구 목록에 바로 뜹니다.\n그다음부터는 파일 내용을 붙여넣을 필요가 없어요. 경로만 알려주면 AI가 직접 읽습니다.\n처음에는 읽기 전용 폴더 하나만 연결하세요. 권한은 좁게 시작하는 게 안전합니다.\n\n저장해두고 오늘 하나만 연결해보세요.",
+      "badge": "DAY 7 / 30",
+      "axis": "기술스택",
+      "carousel": false
+    },
+    {
+      "day": 42,
+      "date": "2026-10-27",
       "weekday": "화",
-      "publish_at": "2026-11-03T20:00:00+09:00",
-      "week": 3,
-      "week_theme": "n8n 자동화 챌린지",
+      "publish_at": "2026-10-27T20:00:00+09:00",
+      "week": 2,
+      "week_theme": "트렌드",
+      "pillar": "교육",
+      "content_type": "본편",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "챗봇 vs 에이전트 차이",
+      "hook_type": "H4",
+      "loop_type": "cta_end",
+      "cover_scene": 1,
+      "bgm": "warm_acoustic_04",
+      "hashtag_set": "A",
+      "scenes": [
+        {
+          "t": [
+            0,
+            1
+          ],
+          "layout": "hook",
+          "title": "차이",
+          "sub": ""
+        },
+        {
+          "t": [
+            1,
+            3
+          ],
+          "layout": "hook",
+          "title": "챗봇과 에이전트",
+          "sub": "뭐가 다를까요?"
+        },
+        {
+          "t": [
+            3,
+            6
+          ],
+          "layout": "point",
+          "title": "챗봇",
+          "sub": "묻고 답만 합니다",
+          "num": "01",
+          "icon": "file"
+        },
+        {
+          "t": [
+            6,
+            9
+          ],
+          "layout": "point",
+          "title": "에이전트",
+          "sub": "도구를 직접 씁니다",
+          "num": "02",
+          "icon": "checklist"
+        },
+        {
+          "t": [
+            9,
+            12
+          ],
+          "layout": "point",
+          "title": "핵심 차이",
+          "sub": "행동까지 하는가",
+          "num": "03",
+          "icon": "link"
+        },
+        {
+          "t": [
+            12,
+            14
+          ],
+          "layout": "compare",
+          "title": "❌ 답만 받기",
+          "sub": "✅ 일까지 맡기기"
+        },
+        {
+          "t": [
+            14,
+            15
+          ],
+          "layout": "cta",
+          "title": "저장하고 따라하기",
+          "sub": ""
+        }
+      ],
+      "caption": "챗봇과 AI 에이전트, 한 줄로 구분하면 이렇습니다.\n\n챗봇은 질문에 답만 합니다.\n에이전트는 파일, 검색, API 같은 도구를 직접 써서 일을 끝냅니다.\n그래서 에이전트를 쓸 때는 답의 품질보다 권한 범위를 먼저 정해야 해요.\n\n저장해두고 도구 고를 때 기준으로 쓰세요.",
+      "badge": "DAY 8 / 30",
+      "axis": "트렌드",
+      "carousel": false
+    },
+    {
+      "day": 51,
+      "date": "2026-10-28",
+      "weekday": "수",
+      "publish_at": "2026-10-28T20:00:00+09:00",
+      "week": 2,
+      "week_theme": "자동화",
       "pillar": "교육",
       "content_type": "A/B변형",
       "tier": "reel15",
@@ -1367,15 +946,203 @@
         }
       ],
       "caption": "슬랙 읽다가 하루가 가고 있다면, 요약은 AI에게 맡기세요.\n\n채널에 새 글이 올라오면 n8n이 감지합니다.\nAI 노드가 세 줄로 요약하고, 매일 아침 메일로 보내줍니다.\n읽는 시간이 줄어드는 건 물론이고 놓치는 공지도 없어져요.\n\n저장해두고 오늘 하나 만들어보세요.",
-      "badge": "DAY 15 / 30"
+      "badge": "DAY 9 / 30",
+      "axis": "자동화",
+      "carousel": false
     },
     {
-      "day": 44,
-      "date": "2026-11-04",
-      "weekday": "수",
-      "publish_at": "2026-11-04T20:00:00+09:00",
-      "week": 3,
-      "week_theme": "n8n 자동화 챌린지",
+      "day": 33,
+      "date": "2026-10-29",
+      "weekday": "목",
+      "publish_at": "2026-10-29T20:00:00+09:00",
+      "week": 2,
+      "week_theme": "기술스택",
+      "pillar": "교육",
+      "content_type": "본편",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "RAG 청킹 실수 TOP3",
+      "hook_type": "H3",
+      "loop_type": "cta_end",
+      "cover_scene": 1,
+      "bgm": "minimal_pulse_03",
+      "hashtag_set": "A",
+      "scenes": [
+        {
+          "t": [
+            0,
+            1
+          ],
+          "layout": "hook",
+          "title": "TOP3",
+          "sub": ""
+        },
+        {
+          "t": [
+            1,
+            3
+          ],
+          "layout": "hook",
+          "title": "RAG가 틀리는 이유",
+          "sub": "대부분 청킹입니다"
+        },
+        {
+          "t": [
+            3,
+            6
+          ],
+          "layout": "point",
+          "title": "너무 크게 자름",
+          "sub": "문맥이 섞여 검색 실패",
+          "num": "01",
+          "icon": "file"
+        },
+        {
+          "t": [
+            6,
+            9
+          ],
+          "layout": "point",
+          "title": "너무 잘게 자름",
+          "sub": "의미가 끊겨 오답",
+          "num": "02",
+          "icon": "checklist"
+        },
+        {
+          "t": [
+            9,
+            12
+          ],
+          "layout": "point",
+          "title": "겹침이 0",
+          "sub": "경계 문장이 사라짐",
+          "num": "03",
+          "icon": "link"
+        },
+        {
+          "t": [
+            12,
+            14
+          ],
+          "layout": "compare",
+          "title": "❌ 글자 수로 자르기",
+          "sub": "✅ 문단 기준으로 자르기"
+        },
+        {
+          "t": [
+            14,
+            15
+          ],
+          "layout": "cta",
+          "title": "저장하고 따라하기",
+          "sub": ""
+        }
+      ],
+      "caption": "RAG 답이 틀린다면 청킹부터 의심하세요.\n\n첫째, 너무 크게 자르면 문맥이 섞여서 엉뚱한 조각이 검색됩니다.\n둘째, 너무 잘게 자르면 의미가 끊겨서 AI가 그럴듯하게 틀립니다.\n셋째, 겹침이 0이면 경계에 걸친 문장이 통째로 사라집니다.\n글자 수 대신 문단 기준으로 자르고, 앞뒤를 조금 겹치게 해보세요.\n\n저장해두고 내 RAG에 대입해보세요.",
+      "badge": "DAY 10 / 30",
+      "axis": "기술스택",
+      "carousel": false
+    },
+    {
+      "day": 43,
+      "date": "2026-10-30",
+      "weekday": "금",
+      "publish_at": "2026-10-30T20:00:00+09:00",
+      "week": 2,
+      "week_theme": "트렌드",
+      "pillar": "교육",
+      "content_type": "서브편",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "무료 AI 툴 고르는 기준 3가지",
+      "hook_type": "H1",
+      "loop_type": "cta_end",
+      "cover_scene": 1,
+      "bgm": "calm_tech_01",
+      "hashtag_set": "A",
+      "scenes": [
+        {
+          "t": [
+            0,
+            1
+          ],
+          "layout": "hook",
+          "title": "무료",
+          "sub": ""
+        },
+        {
+          "t": [
+            1,
+            3
+          ],
+          "layout": "hook",
+          "title": "유료 결제 전에",
+          "sub": "이 3가지 확인"
+        },
+        {
+          "t": [
+            3,
+            6
+          ],
+          "layout": "point",
+          "title": "무료 한도",
+          "sub": "하루 몇 번 쓰나",
+          "num": "01",
+          "icon": "file"
+        },
+        {
+          "t": [
+            6,
+            9
+          ],
+          "layout": "point",
+          "title": "데이터 학습",
+          "sub": "끌 수 있는지 확인",
+          "num": "02",
+          "icon": "checklist"
+        },
+        {
+          "t": [
+            9,
+            12
+          ],
+          "layout": "point",
+          "title": "이전 가능성",
+          "sub": "내보내기가 되는지",
+          "num": "03",
+          "icon": "link"
+        },
+        {
+          "t": [
+            12,
+            14
+          ],
+          "layout": "compare",
+          "title": "❌ 유행 따라 결제",
+          "sub": "✅ 기준으로 선택"
+        },
+        {
+          "t": [
+            14,
+            15
+          ],
+          "layout": "cta",
+          "title": "저장하고 따라하기",
+          "sub": ""
+        }
+      ],
+      "caption": "무료 AI 툴, 결제 전에 세 가지만 확인하세요.\n\n첫째, 무료 한도. 하루에 몇 번 쓸 수 있는지.\n둘째, 내 데이터가 학습에 쓰이는지, 설정에서 끌 수 있는지.\n셋째, 나중에 다른 툴로 옮길 수 있는지. 내보내기가 되는지 보세요.\n\n저장해두고 툴을 고를 때 써보세요.",
+      "badge": "DAY 11 / 30",
+      "axis": "트렌드",
+      "carousel": false
+    },
+    {
+      "day": 52,
+      "date": "2026-10-31",
+      "weekday": "토",
+      "publish_at": "2026-10-31T20:00:00+09:00",
+      "week": 2,
+      "week_theme": "자동화",
       "pillar": "교육",
       "content_type": "서브편",
       "tier": "reel15",
@@ -1458,15 +1225,203 @@
         }
       ],
       "caption": "[30일 자동화 챌린지 Day 3] 매일 아침 브리핑 자동 발송\n\n스케줄 트리거로 매일 오전 8시에 시작합니다.\n일정, 날씨, 메일을 모아서 AI가 한 장으로 정리해 보내요.\n아침에 앱을 세 개 열던 시간이 메일 한 통으로 줄어듭니다.\n\n저장해두고 주말에 만들어보세요.",
-      "badge": "DAY 16 / 30"
+      "badge": "DAY 12 / 30",
+      "axis": "자동화",
+      "carousel": false
     },
     {
-      "day": 45,
-      "date": "2026-11-05",
-      "weekday": "목",
-      "publish_at": "2026-11-05T20:00:00+09:00",
+      "day": 34,
+      "date": "2026-11-01",
+      "weekday": "일",
+      "publish_at": "2026-11-01T20:00:00+09:00",
+      "week": 2,
+      "week_theme": "기술스택",
+      "pillar": "교육",
+      "content_type": "A/B변형",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "RAG 청킹 실수 TOP3 (훅 B)",
+      "hook_type": "H4",
+      "loop_type": "cta_end",
+      "cover_scene": 1,
+      "bgm": "warm_acoustic_04",
+      "hashtag_set": "A",
+      "scenes": [
+        {
+          "t": [
+            0,
+            1
+          ],
+          "layout": "hook",
+          "title": "검색은 OK",
+          "sub": ""
+        },
+        {
+          "t": [
+            1,
+            3
+          ],
+          "layout": "hook",
+          "title": "검색은 되는데",
+          "sub": "답이 틀리면?"
+        },
+        {
+          "t": [
+            3,
+            6
+          ],
+          "layout": "point",
+          "title": "너무 크게 자름",
+          "sub": "문맥이 섞여 검색 실패",
+          "num": "01",
+          "icon": "file"
+        },
+        {
+          "t": [
+            6,
+            9
+          ],
+          "layout": "point",
+          "title": "너무 잘게 자름",
+          "sub": "의미가 끊겨 오답",
+          "num": "02",
+          "icon": "checklist"
+        },
+        {
+          "t": [
+            9,
+            12
+          ],
+          "layout": "point",
+          "title": "겹침이 0",
+          "sub": "경계 문장이 사라짐",
+          "num": "03",
+          "icon": "link"
+        },
+        {
+          "t": [
+            12,
+            14
+          ],
+          "layout": "compare",
+          "title": "❌ 글자 수로 자르기",
+          "sub": "✅ 문단 기준으로 자르기"
+        },
+        {
+          "t": [
+            14,
+            15
+          ],
+          "layout": "cta",
+          "title": "저장하고 따라하기",
+          "sub": ""
+        }
+      ],
+      "caption": "검색은 되는데 답이 틀리다면, 범인은 청킹입니다.\n\n첫째, 너무 크게 자르면 문맥이 섞여서 엉뚱한 조각이 검색됩니다.\n둘째, 너무 잘게 자르면 의미가 끊겨서 AI가 그럴듯하게 틀립니다.\n셋째, 겹침이 0이면 경계에 걸친 문장이 통째로 사라집니다.\n글자 수 대신 문단 기준으로 자르고, 앞뒤를 조금 겹치게 해보세요.\n\n저장해두고 내 RAG에 대입해보세요.",
+      "badge": "DAY 13 / 30",
+      "axis": "기술스택",
+      "carousel": false
+    },
+    {
+      "day": 44,
+      "date": "2026-11-02",
+      "weekday": "월",
+      "publish_at": "2026-11-02T20:00:00+09:00",
+      "week": 2,
+      "week_theme": "트렌드",
+      "pillar": "교육",
+      "content_type": "A/B변형",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "무료 AI 툴 고르는 기준 (훅 B)",
+      "hook_type": "H1",
+      "loop_type": "cta_end",
+      "cover_scene": 1,
+      "bgm": "upbeat_lofi_02",
+      "hashtag_set": "A",
+      "scenes": [
+        {
+          "t": [
+            0,
+            1
+          ],
+          "layout": "hook",
+          "title": "결제 전",
+          "sub": ""
+        },
+        {
+          "t": [
+            1,
+            3
+          ],
+          "layout": "hook",
+          "title": "결제 버튼",
+          "sub": "누르기 전에"
+        },
+        {
+          "t": [
+            3,
+            6
+          ],
+          "layout": "point",
+          "title": "무료 한도",
+          "sub": "하루 몇 번 쓰나",
+          "num": "01",
+          "icon": "file"
+        },
+        {
+          "t": [
+            6,
+            9
+          ],
+          "layout": "point",
+          "title": "데이터 학습",
+          "sub": "끌 수 있는지 확인",
+          "num": "02",
+          "icon": "checklist"
+        },
+        {
+          "t": [
+            9,
+            12
+          ],
+          "layout": "point",
+          "title": "이전 가능성",
+          "sub": "내보내기가 되는지",
+          "num": "03",
+          "icon": "link"
+        },
+        {
+          "t": [
+            12,
+            14
+          ],
+          "layout": "compare",
+          "title": "❌ 유행 따라 결제",
+          "sub": "✅ 기준으로 선택"
+        },
+        {
+          "t": [
+            14,
+            15
+          ],
+          "layout": "cta",
+          "title": "저장하고 따라하기",
+          "sub": ""
+        }
+      ],
+      "caption": "결제 버튼 누르기 전에, 세 가지만 확인하세요.\n\n첫째, 무료 한도. 하루에 몇 번 쓸 수 있는지.\n둘째, 내 데이터가 학습에 쓰이는지, 설정에서 끌 수 있는지.\n셋째, 나중에 다른 툴로 옮길 수 있는지. 내보내기가 되는지 보세요.\n\n저장해두고 툴을 고를 때 써보세요.",
+      "badge": "DAY 14 / 30",
+      "axis": "트렌드",
+      "carousel": false
+    },
+    {
+      "day": 53,
+      "date": "2026-11-03",
+      "weekday": "화",
+      "publish_at": "2026-11-03T20:00:00+09:00",
       "week": 3,
-      "week_theme": "n8n 자동화 챌린지",
+      "week_theme": "자동화",
       "pillar": "교육",
       "content_type": "본편",
       "tier": "reel15",
@@ -1549,15 +1504,203 @@
         }
       ],
       "caption": "[30일 자동화 챌린지 Day 4] 폼 응답을 노션 DB로\n\n폼에 응답이 들어오면 n8n이 바로 받습니다.\n이름, 이메일, 내용을 필드에 연결하면 노션에 행이 자동으로 추가돼요.\n옮기는 일은 이제 손댈 필요가 없습니다.\n\n저장해두고 폼 하나에 연결해보세요.",
-      "badge": "DAY 17 / 30"
+      "badge": "DAY 15 / 30",
+      "axis": "자동화",
+      "carousel": false
     },
     {
-      "day": 46,
+      "day": 35,
+      "date": "2026-11-04",
+      "weekday": "수",
+      "publish_at": "2026-11-04T20:00:00+09:00",
+      "week": 3,
+      "week_theme": "기술스택",
+      "pillar": "교육",
+      "content_type": "서브편",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "하이브리드 검색: 키워드+벡터",
+      "hook_type": "H1",
+      "loop_type": "cta_end",
+      "cover_scene": 1,
+      "bgm": "calm_tech_01",
+      "hashtag_set": "A",
+      "scenes": [
+        {
+          "t": [
+            0,
+            1
+          ],
+          "layout": "hook",
+          "title": "2개",
+          "sub": ""
+        },
+        {
+          "t": [
+            1,
+            3
+          ],
+          "layout": "hook",
+          "title": "키워드와 벡터",
+          "sub": "같이 쓰세요"
+        },
+        {
+          "t": [
+            3,
+            6
+          ],
+          "layout": "point",
+          "title": "벡터만 쓰면",
+          "sub": "고유명사를 놓침",
+          "num": "01",
+          "icon": "file"
+        },
+        {
+          "t": [
+            6,
+            9
+          ],
+          "layout": "point",
+          "title": "키워드만 쓰면",
+          "sub": "동의어를 놓침",
+          "num": "02",
+          "icon": "checklist"
+        },
+        {
+          "t": [
+            9,
+            12
+          ],
+          "layout": "point",
+          "title": "점수를 합치기",
+          "sub": "RRF로 순위 병합",
+          "num": "03",
+          "icon": "link"
+        },
+        {
+          "t": [
+            12,
+            14
+          ],
+          "layout": "compare",
+          "title": "❌ 한 가지로 검색",
+          "sub": "✅ 두 가지를 합치기"
+        },
+        {
+          "t": [
+            14,
+            15
+          ],
+          "layout": "cta",
+          "title": "저장하고 따라하기",
+          "sub": ""
+        }
+      ],
+      "caption": "검색 방식이 하나면 반드시 놓치는 게 생깁니다.\n\n벡터 검색은 의미는 잘 잡지만 제품명이나 법령 번호 같은 고유명사를 놓칩니다.\n키워드 검색은 정확하지만 비슷한 표현을 못 찾습니다.\n둘을 같이 돌리고 순위를 합치면(RRF) 서로의 빈틈을 메워요.\n\n저장해두고 검색 파이프라인에 적용해보세요.",
+      "badge": "DAY 16 / 30",
+      "axis": "기술스택",
+      "carousel": false
+    },
+    {
+      "day": 45,
+      "date": "2026-11-05",
+      "weekday": "목",
+      "publish_at": "2026-11-05T20:00:00+09:00",
+      "week": 3,
+      "week_theme": "트렌드",
+      "pillar": "교육",
+      "content_type": "본편",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "새 모델 나오면 확인할 3가지",
+      "hook_type": "H1",
+      "loop_type": "cta_end",
+      "cover_scene": 1,
+      "bgm": "minimal_pulse_03",
+      "hashtag_set": "A",
+      "scenes": [
+        {
+          "t": [
+            0,
+            1
+          ],
+          "layout": "hook",
+          "title": "3가지",
+          "sub": ""
+        },
+        {
+          "t": [
+            1,
+            3
+          ],
+          "layout": "hook",
+          "title": "새 모델 나오면",
+          "sub": "이것만 확인"
+        },
+        {
+          "t": [
+            3,
+            6
+          ],
+          "layout": "point",
+          "title": "가격",
+          "sub": "입력 · 출력 단가",
+          "num": "01",
+          "icon": "file"
+        },
+        {
+          "t": [
+            6,
+            9
+          ],
+          "layout": "point",
+          "title": "한도",
+          "sub": "컨텍스트 · 속도",
+          "num": "02",
+          "icon": "checklist"
+        },
+        {
+          "t": [
+            9,
+            12
+          ],
+          "layout": "point",
+          "title": "내 작업",
+          "sub": "내 데이터로 테스트",
+          "num": "03",
+          "icon": "link"
+        },
+        {
+          "t": [
+            12,
+            14
+          ],
+          "layout": "compare",
+          "title": "❌ 발표만 보고 교체",
+          "sub": "✅ 직접 돌려보고 결정"
+        },
+        {
+          "t": [
+            14,
+            15
+          ],
+          "layout": "cta",
+          "title": "저장하고 따라하기",
+          "sub": ""
+        }
+      ],
+      "caption": "새 모델이 나왔을 때 바로 갈아타지 마세요.\n\n가격은 입력과 출력 단가를 따로 봅니다.\n한도는 컨텍스트 길이와 속도를 확인하세요.\n마지막은 내 작업입니다. 내 데이터 몇 개로 직접 돌려본 결과가 제일 정확해요.\n\n저장해두고 다음 발표 때 써보세요.",
+      "badge": "DAY 17 / 30",
+      "axis": "트렌드",
+      "carousel": false
+    },
+    {
+      "day": 54,
       "date": "2026-11-06",
       "weekday": "금",
       "publish_at": "2026-11-06T20:00:00+09:00",
       "week": 3,
-      "week_theme": "n8n 자동화 챌린지",
+      "week_theme": "자동화",
       "pillar": "교육",
       "content_type": "A/B변형",
       "tier": "reel15",
@@ -1640,161 +1783,221 @@
         }
       ],
       "caption": "폼 응답 옮기다 퇴근이 늦어지나요? 옮기는 일은 n8n이 합니다.\n\n폼에 응답이 들어오면 n8n이 바로 받습니다.\n이름, 이메일, 내용을 필드에 연결하면 노션에 행이 자동으로 추가돼요.\n옮기는 일은 이제 손댈 필요가 없습니다.\n\n저장해두고 폼 하나에 연결해보세요.",
-      "badge": "DAY 18 / 30"
+      "badge": "DAY 18 / 30",
+      "axis": "자동화",
+      "carousel": false
     },
     {
-      "day": 47,
+      "day": 36,
       "date": "2026-11-07",
       "weekday": "토",
       "publish_at": "2026-11-07T20:00:00+09:00",
       "week": 3,
-      "week_theme": "n8n 자동화 챌린지",
-      "pillar": "사례",
-      "content_type": "하이라이트",
-      "tier": "info",
-      "duration_sec": 22,
-      "topic": "이번 주 n8n 챌린지 하이라이트",
-      "hook_type": "H5",
+      "week_theme": "기술스택",
+      "pillar": "교육",
+      "content_type": "본편",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "RAG 평가: RAGAS 점수로 확인",
+      "hook_type": "H2",
       "loop_type": "cta_end",
-      "cover_scene": 0,
+      "cover_scene": 1,
+      "bgm": "upbeat_lofi_02",
+      "hashtag_set": "A",
+      "scenes": [
+        {
+          "t": [
+            0,
+            1
+          ],
+          "layout": "hook",
+          "title": "점수",
+          "sub": ""
+        },
+        {
+          "t": [
+            1,
+            3
+          ],
+          "layout": "hook",
+          "title": "RAG 좋아졌나요?",
+          "sub": "숫자로 확인하세요"
+        },
+        {
+          "t": [
+            3,
+            6
+          ],
+          "layout": "point",
+          "title": "질문 20개 준비",
+          "sub": "정답 기준을 적기",
+          "num": "01",
+          "icon": "file"
+        },
+        {
+          "t": [
+            6,
+            9
+          ],
+          "layout": "point",
+          "title": "RAGAS로 채점",
+          "sub": "충실도 · 관련성",
+          "num": "02",
+          "icon": "checklist"
+        },
+        {
+          "t": [
+            9,
+            12
+          ],
+          "layout": "point",
+          "title": "수정 전후 비교",
+          "sub": "점수가 오르면 채택",
+          "num": "03",
+          "icon": "link"
+        },
+        {
+          "t": [
+            12,
+            14
+          ],
+          "layout": "compare",
+          "title": "❌ 느낌으로 판단",
+          "sub": "✅ 점수로 판단"
+        },
+        {
+          "t": [
+            14,
+            15
+          ],
+          "layout": "cta",
+          "title": "저장하고 따라하기",
+          "sub": ""
+        }
+      ],
+      "caption": "RAG를 고쳤는데 좋아졌는지 어떻게 아세요?\n\n질문 20개와 정답 기준을 먼저 적어두세요.\nRAGAS 같은 평가 도구로 충실도와 관련성 점수를 매깁니다.\n수정 전후를 비교해서 점수가 오른 변경만 채택하세요.\n\n저장해두고 다음 수정 때 써보세요.",
+      "badge": "DAY 19 / 30",
+      "axis": "기술스택",
+      "carousel": false
+    },
+    {
+      "day": 46,
+      "date": "2026-11-08",
+      "weekday": "일",
+      "publish_at": "2026-11-08T20:00:00+09:00",
+      "week": 3,
+      "week_theme": "트렌드",
+      "pillar": "교육",
+      "content_type": "서브편",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "벤치마크 점수 읽는 법",
+      "hook_type": "H3",
+      "loop_type": "cta_end",
+      "cover_scene": 1,
+      "bgm": "warm_acoustic_04",
+      "hashtag_set": "A",
+      "scenes": [
+        {
+          "t": [
+            0,
+            1
+          ],
+          "layout": "hook",
+          "title": "점수",
+          "sub": ""
+        },
+        {
+          "t": [
+            1,
+            3
+          ],
+          "layout": "hook",
+          "title": "벤치마크 점수",
+          "sub": "그대로 믿어도 될까"
+        },
+        {
+          "t": [
+            3,
+            6
+          ],
+          "layout": "point",
+          "title": "무엇을 재나",
+          "sub": "시험 종류부터 확인",
+          "num": "01",
+          "icon": "file"
+        },
+        {
+          "t": [
+            6,
+            9
+          ],
+          "layout": "point",
+          "title": "내 작업과 비슷",
+          "sub": "코딩 · 요약 · 검색",
+          "num": "02",
+          "icon": "checklist"
+        },
+        {
+          "t": [
+            9,
+            12
+          ],
+          "layout": "point",
+          "title": "직접 비교",
+          "sub": "같은 질문으로 테스트",
+          "num": "03",
+          "icon": "link"
+        },
+        {
+          "t": [
+            12,
+            14
+          ],
+          "layout": "compare",
+          "title": "❌ 순위표만 보기",
+          "sub": "✅ 내 질문으로 비교"
+        },
+        {
+          "t": [
+            14,
+            15
+          ],
+          "layout": "cta",
+          "title": "저장하고 따라하기",
+          "sub": ""
+        }
+      ],
+      "caption": "벤치마크 순위표, 그대로 믿기엔 위험합니다.\n\n어떤 시험인지부터 보세요. 코딩인지, 추론인지, 요약인지 다릅니다.\n내 작업과 비슷한 시험일 때만 참고 가치가 있어요.\n결국 같은 질문 몇 개를 직접 던져 비교하는 게 가장 확실합니다.\n\n저장해두고 순위표 볼 때 떠올리세요.",
+      "badge": "DAY 20 / 30",
+      "axis": "트렌드",
+      "carousel": false
+    },
+    {
+      "day": 55,
+      "date": "2026-11-09",
+      "weekday": "월",
+      "publish_at": "2026-11-09T20:00:00+09:00",
+      "week": 3,
+      "week_theme": "자동화",
+      "pillar": "교육",
+      "content_type": "본편",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "자동화 실패 알림 받는 법",
+      "hook_type": "H1",
+      "loop_type": "cta_end",
+      "cover_scene": 1,
       "bgm": "calm_tech_01",
       "hashtag_set": "B",
       "scenes": [
         {
           "t": [
             0,
-            3
-          ],
-          "layout": "hook",
-          "title": "이번 주 n8n 자동화",
-          "sub": "3줄 요약"
-        },
-        {
-          "t": [
-            3,
-            8
-          ],
-          "layout": "point",
-          "title": "Day 2",
-          "sub": "슬랙 메시지 요약",
-          "num": "01"
-        },
-        {
-          "t": [
-            8,
-            13
-          ],
-          "layout": "point",
-          "title": "Day 3",
-          "sub": "아침 브리핑",
-          "num": "02"
-        },
-        {
-          "t": [
-            13,
-            18
-          ],
-          "layout": "point",
-          "title": "Day 4",
-          "sub": "폼 응답을 노션으로",
-          "num": "03"
-        },
-        {
-          "t": [
-            18,
-            22
-          ],
-          "layout": "cta",
-          "title": "저장해두세요",
-          "sub": ""
-        }
-      ],
-      "caption": "이번 주 n8n 자동화 정리했습니다.\n\n1) Day 2: 슬랙 메시지 요약\n2) Day 3: 아침 브리핑\n3) Day 4: 폼 응답을 노션으로\n\n놓친 게 있다면 저장하고 하나씩 보세요.",
-      "badge": "DAY 19 / 30"
-    },
-    {
-      "day": 48,
-      "date": "2026-11-08",
-      "weekday": "일",
-      "publish_at": "2026-11-08T20:00:00+09:00",
-      "week": 3,
-      "week_theme": "n8n 자동화 챌린지",
-      "pillar": "참여",
-      "content_type": "예고",
-      "tier": "loop",
-      "duration_sec": 12,
-      "topic": "다음 주 예고: AI 트렌드·운영 팁",
-      "hook_type": "H5",
-      "loop_type": "seamless",
-      "cover_scene": 0,
-      "bgm": "upbeat_lofi_02",
-      "hashtag_set": "A",
-      "scenes": [
-        {
-          "t": [
-            0,
-            3
-          ],
-          "layout": "hook",
-          "title": "다음 주",
-          "sub": "AI 트렌드"
-        },
-        {
-          "t": [
-            3,
-            6
-          ],
-          "layout": "point",
-          "title": "뉴스 3줄 읽기",
-          "sub": "따라가는 법"
-        },
-        {
-          "t": [
-            6,
-            9
-          ],
-          "layout": "point",
-          "title": "툴 고르는 기준",
-          "sub": "비용 줄이기"
-        },
-        {
-          "t": [
-            9,
-            12
-          ],
-          "layout": "cta",
-          "title": "팔로우하고 보세요",
-          "sub": ""
-        }
-      ],
-      "caption": "다음 주는 AI 트렌드입니다.\n\n뉴스 3줄 읽기: 따라가는 법\n툴 고르는 기준: 비용 줄이기\n\n팔로우하면 놓치지 않아요.",
-      "badge": "DAY 20 / 30"
-    },
-    {
-      "day": 49,
-      "date": "2026-11-09",
-      "weekday": "월",
-      "publish_at": "2026-11-09T20:00:00+09:00",
-      "week": 4,
-      "week_theme": "AI 트렌드·운영 팁",
-      "pillar": "교육",
-      "content_type": "본편",
-      "tier": "reel15",
-      "duration_sec": 15,
-      "topic": "AI 뉴스 3줄로 읽는 법",
-      "hook_type": "H3",
-      "loop_type": "cta_end",
-      "cover_scene": 1,
-      "bgm": "minimal_pulse_03",
-      "hashtag_set": "A",
-      "scenes": [
-        {
-          "t": [
-            0,
             1
           ],
           "layout": "hook",
-          "title": "3줄",
+          "title": "알림",
           "sub": ""
         },
         {
@@ -1803,8 +2006,8 @@
             3
           ],
           "layout": "hook",
-          "title": "AI 뉴스 따라가기",
-          "sub": "3줄이면 됩니다"
+          "title": "자동화가 멈춘 걸",
+          "sub": "언제 아시나요?"
         },
         {
           "t": [
@@ -1812,8 +2015,8 @@
             6
           ],
           "layout": "point",
-          "title": "무엇이 나왔나",
-          "sub": "한 줄로 요약",
+          "title": "실패 트리거",
+          "sub": "에러 시 실행되는 흐름",
           "num": "01",
           "icon": "file"
         },
@@ -1823,8 +2026,8 @@
             9
           ],
           "layout": "point",
-          "title": "내게 쓸모 있나",
-          "sub": "내 업무에 대입",
+          "title": "메시지 보내기",
+          "sub": "슬랙 · 텔레그램",
           "num": "02",
           "icon": "checklist"
         },
@@ -1834,8 +2037,8 @@
             12
           ],
           "layout": "point",
-          "title": "오늘 써볼 것",
-          "sub": "하나만 직접 실행",
+          "title": "내용 담기",
+          "sub": "어디서 · 왜 실패",
           "num": "03",
           "icon": "link"
         },
@@ -1845,8 +2048,8 @@
             14
           ],
           "layout": "compare",
-          "title": "❌ 뉴스 전부 읽기",
-          "sub": "✅ 3줄만 읽기"
+          "title": "❌ 며칠 뒤 발견",
+          "sub": "✅ 바로 알림 받기"
         },
         {
           "t": [
@@ -1858,508 +2061,18 @@
           "sub": ""
         }
       ],
-      "caption": "AI 뉴스, 다 읽으면 따라갈 수 없습니다.\n\n무엇이 나왔는지 한 줄, 내 업무에 쓸모 있는지 한 줄, 오늘 써볼 것 한 줄.\n이 세 줄만 적으면 충분합니다.\n중요한 건 읽는 양이 아니라 오늘 하나라도 직접 써보는 것이에요.\n\n저장해두고 내일 뉴스부터 적용해보세요.",
-      "badge": "DAY 21 / 30"
+      "caption": "자동화가 멈췄는데 며칠 뒤에야 아는 경우가 많습니다.\n\n에러가 날 때만 실행되는 흐름을 하나 만드세요.\n슬랙이나 텔레그램으로 메시지를 보내고, 어디서 왜 실패했는지를 함께 담습니다.\n알림 하나가 있으면 자동화를 믿고 맡길 수 있어요.\n\n저장해두고 오늘 하나 추가해보세요.",
+      "badge": "DAY 21 / 30",
+      "axis": "자동화",
+      "carousel": false
     },
     {
-      "day": 50,
+      "day": 37,
       "date": "2026-11-10",
       "weekday": "화",
       "publish_at": "2026-11-10T20:00:00+09:00",
       "week": 4,
-      "week_theme": "AI 트렌드·운영 팁",
-      "pillar": "교육",
-      "content_type": "A/B변형",
-      "tier": "reel15",
-      "duration_sec": 15,
-      "topic": "AI 뉴스 3줄로 읽는 법 (훅 B)",
-      "hook_type": "H3",
-      "loop_type": "cta_end",
-      "cover_scene": 1,
-      "bgm": "warm_acoustic_04",
-      "hashtag_set": "A",
-      "scenes": [
-        {
-          "t": [
-            0,
-            1
-          ],
-          "layout": "hook",
-          "title": "못 따라감",
-          "sub": ""
-        },
-        {
-          "t": [
-            1,
-            3
-          ],
-          "layout": "hook",
-          "title": "뉴스 다 읽다간",
-          "sub": "못 따라갑니다"
-        },
-        {
-          "t": [
-            3,
-            6
-          ],
-          "layout": "point",
-          "title": "무엇이 나왔나",
-          "sub": "한 줄로 요약",
-          "num": "01",
-          "icon": "file"
-        },
-        {
-          "t": [
-            6,
-            9
-          ],
-          "layout": "point",
-          "title": "내게 쓸모 있나",
-          "sub": "내 업무에 대입",
-          "num": "02",
-          "icon": "checklist"
-        },
-        {
-          "t": [
-            9,
-            12
-          ],
-          "layout": "point",
-          "title": "오늘 써볼 것",
-          "sub": "하나만 직접 실행",
-          "num": "03",
-          "icon": "link"
-        },
-        {
-          "t": [
-            12,
-            14
-          ],
-          "layout": "compare",
-          "title": "❌ 뉴스 전부 읽기",
-          "sub": "✅ 3줄만 읽기"
-        },
-        {
-          "t": [
-            14,
-            15
-          ],
-          "layout": "cta",
-          "title": "저장하고 따라하기",
-          "sub": ""
-        }
-      ],
-      "caption": "AI 뉴스, 다 읽다간 못 따라갑니다. 3줄만 적으세요.\n\n무엇이 나왔는지 한 줄, 내 업무에 쓸모 있는지 한 줄, 오늘 써볼 것 한 줄.\n이 세 줄만 적으면 충분합니다.\n중요한 건 읽는 양이 아니라 오늘 하나라도 직접 써보는 것이에요.\n\n저장해두고 내일 뉴스부터 적용해보세요.",
-      "badge": "DAY 22 / 30"
-    },
-    {
-      "day": 51,
-      "date": "2026-11-11",
-      "weekday": "수",
-      "publish_at": "2026-11-11T20:00:00+09:00",
-      "week": 4,
-      "week_theme": "AI 트렌드·운영 팁",
-      "pillar": "교육",
-      "content_type": "서브편",
-      "tier": "reel15",
-      "duration_sec": 15,
-      "topic": "무료 AI 툴 고르는 기준 3가지 (실전 활용편)",
-      "hook_type": "H1",
-      "loop_type": "cta_end",
-      "cover_scene": 1,
-      "bgm": "calm_tech_01",
-      "hashtag_set": "C",
-      "scenes": [
-        {
-          "t": [
-            0,
-            1
-          ],
-          "layout": "hook",
-          "title": "무료",
-          "sub": ""
-        },
-        {
-          "t": [
-            1,
-            3
-          ],
-          "layout": "hook",
-          "title": "유료 결제 전에",
-          "sub": "이 3가지 확인"
-        },
-        {
-          "t": [
-            3,
-            6
-          ],
-          "layout": "point",
-          "title": "무료 한도",
-          "sub": "하루 몇 번 쓰나",
-          "num": "01",
-          "icon": "file"
-        },
-        {
-          "t": [
-            6,
-            9
-          ],
-          "layout": "point",
-          "title": "데이터 학습",
-          "sub": "끌 수 있는지 확인",
-          "num": "02",
-          "icon": "checklist"
-        },
-        {
-          "t": [
-            9,
-            12
-          ],
-          "layout": "point",
-          "title": "이전 가능성",
-          "sub": "내보내기가 되는지",
-          "num": "03",
-          "icon": "link"
-        },
-        {
-          "t": [
-            12,
-            14
-          ],
-          "layout": "compare",
-          "title": "❌ 유행 따라 결제",
-          "sub": "✅ 기준으로 선택"
-        },
-        {
-          "t": [
-            14,
-            15
-          ],
-          "layout": "cta",
-          "title": "저장하고 따라하기",
-          "sub": ""
-        }
-      ],
-      "caption": "무료 AI 툴, 결제 전에 세 가지만 확인하세요.\n\n첫째, 무료 한도. 하루에 몇 번 쓸 수 있는지.\n둘째, 내 데이터가 학습에 쓰이는지, 설정에서 끌 수 있는지.\n셋째, 나중에 다른 툴로 옮길 수 있는지. 내보내기가 되는지 보세요.\n\n저장해두고 툴을 고를 때 써보세요.",
-      "badge": "DAY 23 / 30"
-    },
-    {
-      "day": 52,
-      "date": "2026-11-12",
-      "weekday": "목",
-      "publish_at": "2026-11-12T20:00:00+09:00",
-      "week": 4,
-      "week_theme": "AI 트렌드·운영 팁",
-      "pillar": "교육",
-      "content_type": "본편",
-      "tier": "reel15",
-      "duration_sec": 15,
-      "topic": "AI API 비용 줄이는 3가지",
-      "hook_type": "H1",
-      "loop_type": "cta_end",
-      "cover_scene": 1,
-      "bgm": "upbeat_lofi_02",
-      "hashtag_set": "A",
-      "scenes": [
-        {
-          "t": [
-            0,
-            1
-          ],
-          "layout": "hook",
-          "title": "비용",
-          "sub": ""
-        },
-        {
-          "t": [
-            1,
-            3
-          ],
-          "layout": "hook",
-          "title": "API 요금이 걱정되면",
-          "sub": "이 3개부터"
-        },
-        {
-          "t": [
-            3,
-            6
-          ],
-          "layout": "point",
-          "title": "작은 모델 먼저",
-          "sub": "쉬운 건 가볍게",
-          "num": "01",
-          "icon": "file"
-        },
-        {
-          "t": [
-            6,
-            9
-          ],
-          "layout": "point",
-          "title": "프롬프트 캐싱",
-          "sub": "반복 부분 재사용",
-          "num": "02",
-          "icon": "checklist"
-        },
-        {
-          "t": [
-            9,
-            12
-          ],
-          "layout": "point",
-          "title": "출력 길이 제한",
-          "sub": "max tokens 설정",
-          "num": "03",
-          "icon": "link"
-        },
-        {
-          "t": [
-            12,
-            14
-          ],
-          "layout": "compare",
-          "title": "❌ 매번 큰 모델",
-          "sub": "✅ 일 따라 모델 선택"
-        },
-        {
-          "t": [
-            14,
-            15
-          ],
-          "layout": "cta",
-          "title": "저장하고 따라하기",
-          "sub": ""
-        }
-      ],
-      "caption": "API 요금, 줄이는 방법은 생각보다 단순합니다.\n\n쉬운 작업은 작은 모델에 맡기세요.\n매번 똑같이 들어가는 앞부분은 프롬프트 캐싱으로 재사용합니다.\n출력 길이에 상한을 두면 불필요하게 길어지는 답변이 줄어요.\n\n저장해두고 이번 달 청구서와 비교해보세요.",
-      "badge": "DAY 24 / 30"
-    },
-    {
-      "day": 53,
-      "date": "2026-11-13",
-      "weekday": "금",
-      "publish_at": "2026-11-13T20:00:00+09:00",
-      "week": 4,
-      "week_theme": "AI 트렌드·운영 팁",
-      "pillar": "교육",
-      "content_type": "A/B변형",
-      "tier": "reel15",
-      "duration_sec": 15,
-      "topic": "AI API 비용 줄이기 (훅 B)",
-      "hook_type": "H1",
-      "loop_type": "cta_end",
-      "cover_scene": 1,
-      "bgm": "minimal_pulse_03",
-      "hashtag_set": "A",
-      "scenes": [
-        {
-          "t": [
-            0,
-            1
-          ],
-          "layout": "hook",
-          "title": "청구서",
-          "sub": ""
-        },
-        {
-          "t": [
-            1,
-            3
-          ],
-          "layout": "hook",
-          "title": "청구서 보고",
-          "sub": "놀라셨나요?"
-        },
-        {
-          "t": [
-            3,
-            6
-          ],
-          "layout": "point",
-          "title": "작은 모델 먼저",
-          "sub": "쉬운 건 가볍게",
-          "num": "01",
-          "icon": "file"
-        },
-        {
-          "t": [
-            6,
-            9
-          ],
-          "layout": "point",
-          "title": "프롬프트 캐싱",
-          "sub": "반복 부분 재사용",
-          "num": "02",
-          "icon": "checklist"
-        },
-        {
-          "t": [
-            9,
-            12
-          ],
-          "layout": "point",
-          "title": "출력 길이 제한",
-          "sub": "max tokens 설정",
-          "num": "03",
-          "icon": "link"
-        },
-        {
-          "t": [
-            12,
-            14
-          ],
-          "layout": "compare",
-          "title": "❌ 매번 큰 모델",
-          "sub": "✅ 일 따라 모델 선택"
-        },
-        {
-          "t": [
-            14,
-            15
-          ],
-          "layout": "cta",
-          "title": "저장하고 따라하기",
-          "sub": ""
-        }
-      ],
-      "caption": "청구서 보고 놀라셨나요? 줄이는 방법은 3개뿐입니다.\n\n쉬운 작업은 작은 모델에 맡기세요.\n매번 똑같이 들어가는 앞부분은 프롬프트 캐싱으로 재사용합니다.\n출력 길이에 상한을 두면 불필요하게 길어지는 답변이 줄어요.\n\n저장해두고 이번 달 청구서와 비교해보세요.",
-      "badge": "DAY 25 / 30"
-    },
-    {
-      "day": 54,
-      "date": "2026-11-14",
-      "weekday": "토",
-      "publish_at": "2026-11-14T20:00:00+09:00",
-      "week": 4,
-      "week_theme": "AI 트렌드·운영 팁",
-      "pillar": "사례",
-      "content_type": "하이라이트",
-      "tier": "info",
-      "duration_sec": 22,
-      "topic": "이번 주 트렌드·운영 팁 하이라이트",
-      "hook_type": "H5",
-      "loop_type": "cta_end",
-      "cover_scene": 0,
-      "bgm": "warm_acoustic_04",
-      "hashtag_set": "A",
-      "scenes": [
-        {
-          "t": [
-            0,
-            3
-          ],
-          "layout": "hook",
-          "title": "이번 주 팁",
-          "sub": "3줄 요약"
-        },
-        {
-          "t": [
-            3,
-            8
-          ],
-          "layout": "point",
-          "title": "뉴스 3줄",
-          "sub": "무엇 · 쓸모 · 실행",
-          "num": "01"
-        },
-        {
-          "t": [
-            8,
-            13
-          ],
-          "layout": "point",
-          "title": "툴 기준",
-          "sub": "한도 · 학습 · 이전",
-          "num": "02"
-        },
-        {
-          "t": [
-            13,
-            18
-          ],
-          "layout": "point",
-          "title": "비용 절감",
-          "sub": "모델 · 캐싱 · 길이",
-          "num": "03"
-        },
-        {
-          "t": [
-            18,
-            22
-          ],
-          "layout": "cta",
-          "title": "저장해두세요",
-          "sub": ""
-        }
-      ],
-      "caption": "이번 주 AI 트렌드와 운영 팁 정리했습니다.\n\n1) 뉴스 3줄: 무엇 · 쓸모 · 오늘 할 것\n2) 툴 기준: 한도 · 학습 · 이전\n3) 비용 절감: 모델 · 캐싱 · 길이\n\n놓친 게 있다면 저장하고 하나씩 보세요.",
-      "badge": "DAY 26 / 30"
-    },
-    {
-      "day": 55,
-      "date": "2026-11-15",
-      "weekday": "일",
-      "publish_at": "2026-11-15T20:00:00+09:00",
-      "week": 4,
-      "week_theme": "AI 트렌드·운영 팁",
-      "pillar": "참여",
-      "content_type": "예고",
-      "tier": "loop",
-      "duration_sec": 12,
-      "topic": "다음 주 예고: 프롬프트 작성법",
-      "hook_type": "H5",
-      "loop_type": "seamless",
-      "cover_scene": 0,
-      "bgm": "calm_tech_01",
-      "hashtag_set": "A",
-      "scenes": [
-        {
-          "t": [
-            0,
-            3
-          ],
-          "layout": "hook",
-          "title": "다음 주",
-          "sub": "프롬프트 편"
-        },
-        {
-          "t": [
-            3,
-            6
-          ],
-          "layout": "point",
-          "title": "조건 · 예시 · 형식",
-          "sub": "3칸 공식"
-        },
-        {
-          "t": [
-            6,
-            9
-          ],
-          "layout": "point",
-          "title": "결과가 달라지는",
-          "sub": "이유"
-        },
-        {
-          "t": [
-            9,
-            12
-          ],
-          "layout": "cta",
-          "title": "팔로우하고 보세요",
-          "sub": ""
-        }
-      ],
-      "caption": "다음 주는 프롬프트 편입니다.\n\n조건 · 예시 · 형식: 3칸 공식\n결과가 달라지는: 이유\n\n팔로우하면 놓치지 않아요.",
-      "badge": "DAY 27 / 30"
-    },
-    {
-      "day": 56,
-      "date": "2026-11-16",
-      "weekday": "월",
-      "publish_at": "2026-11-16T20:00:00+09:00",
-      "week": 5,
-      "week_theme": "프롬프트·결산",
+      "week_theme": "기술스택",
       "pillar": "교육",
       "content_type": "본편",
       "tier": "reel15",
@@ -2368,7 +2081,7 @@
       "hook_type": "H3",
       "loop_type": "cta_end",
       "cover_scene": 1,
-      "bgm": "upbeat_lofi_02",
+      "bgm": "minimal_pulse_03",
       "hashtag_set": "A",
       "scenes": [
         {
@@ -2442,15 +2155,203 @@
         }
       ],
       "caption": "프롬프트는 길게 쓰는 게 아니라 3칸을 채우는 겁니다.\n\n조건: 무엇을 원하는지.\n예시: 원하는 결과 하나.\n형식: 표인지 목록인지 코드인지.\n이 세 칸만 채워도 같은 AI에서 결과가 달라집니다.\n\n저장해두고 다음 질문에 써보세요.",
-      "badge": "DAY 28 / 30"
+      "badge": "DAY 22 / 30",
+      "axis": "기술스택",
+      "carousel": false
     },
     {
-      "day": 57,
-      "date": "2026-11-17",
-      "weekday": "화",
-      "publish_at": "2026-11-17T20:00:00+09:00",
-      "week": 5,
-      "week_theme": "프롬프트·결산",
+      "day": 47,
+      "date": "2026-11-11",
+      "weekday": "수",
+      "publish_at": "2026-11-11T20:00:00+09:00",
+      "week": 4,
+      "week_theme": "트렌드",
+      "pillar": "교육",
+      "content_type": "A/B변형",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "벤치마크 점수 읽는 법 (훅 B)",
+      "hook_type": "H4",
+      "loop_type": "cta_end",
+      "cover_scene": 1,
+      "bgm": "calm_tech_01",
+      "hashtag_set": "A",
+      "scenes": [
+        {
+          "t": [
+            0,
+            1
+          ],
+          "layout": "hook",
+          "title": "순위표",
+          "sub": ""
+        },
+        {
+          "t": [
+            1,
+            3
+          ],
+          "layout": "hook",
+          "title": "순위표 1등이",
+          "sub": "내게도 1등일까?"
+        },
+        {
+          "t": [
+            3,
+            6
+          ],
+          "layout": "point",
+          "title": "무엇을 재나",
+          "sub": "시험 종류부터 확인",
+          "num": "01",
+          "icon": "file"
+        },
+        {
+          "t": [
+            6,
+            9
+          ],
+          "layout": "point",
+          "title": "내 작업과 비슷",
+          "sub": "코딩 · 요약 · 검색",
+          "num": "02",
+          "icon": "checklist"
+        },
+        {
+          "t": [
+            9,
+            12
+          ],
+          "layout": "point",
+          "title": "직접 비교",
+          "sub": "같은 질문으로 테스트",
+          "num": "03",
+          "icon": "link"
+        },
+        {
+          "t": [
+            12,
+            14
+          ],
+          "layout": "compare",
+          "title": "❌ 순위표만 보기",
+          "sub": "✅ 내 질문으로 비교"
+        },
+        {
+          "t": [
+            14,
+            15
+          ],
+          "layout": "cta",
+          "title": "저장하고 따라하기",
+          "sub": ""
+        }
+      ],
+      "caption": "순위표 1등이 내 작업에서도 1등일까요?\n\n어떤 시험인지부터 보세요. 코딩인지, 추론인지, 요약인지 다릅니다.\n내 작업과 비슷한 시험일 때만 참고 가치가 있어요.\n결국 같은 질문 몇 개를 직접 던져 비교하는 게 가장 확실합니다.\n\n저장해두고 순위표 볼 때 떠올리세요.",
+      "badge": "DAY 23 / 30",
+      "axis": "트렌드",
+      "carousel": false
+    },
+    {
+      "day": 56,
+      "date": "2026-11-12",
+      "weekday": "목",
+      "publish_at": "2026-11-12T20:00:00+09:00",
+      "week": 4,
+      "week_theme": "자동화",
+      "pillar": "교육",
+      "content_type": "서브편",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "로그 3개: 자동화의 생명줄",
+      "hook_type": "H1",
+      "loop_type": "cta_end",
+      "cover_scene": 1,
+      "bgm": "upbeat_lofi_02",
+      "hashtag_set": "B",
+      "scenes": [
+        {
+          "t": [
+            0,
+            1
+          ],
+          "layout": "hook",
+          "title": "로그",
+          "sub": ""
+        },
+        {
+          "t": [
+            1,
+            3
+          ],
+          "layout": "hook",
+          "title": "자동화의 생명줄",
+          "sub": "로그 3개"
+        },
+        {
+          "t": [
+            3,
+            6
+          ],
+          "layout": "point",
+          "title": "시작 시각",
+          "sub": "언제 돌았는지",
+          "num": "01",
+          "icon": "file"
+        },
+        {
+          "t": [
+            6,
+            9
+          ],
+          "layout": "point",
+          "title": "처리 결과",
+          "sub": "몇 건 처리했는지",
+          "num": "02",
+          "icon": "checklist"
+        },
+        {
+          "t": [
+            9,
+            12
+          ],
+          "layout": "point",
+          "title": "에러 전문",
+          "sub": "traceback 전체",
+          "num": "03",
+          "icon": "link"
+        },
+        {
+          "t": [
+            12,
+            14
+          ],
+          "layout": "compare",
+          "title": "❌ print로 확인",
+          "sub": "✅ logging으로 기록"
+        },
+        {
+          "t": [
+            14,
+            15
+          ],
+          "layout": "cta",
+          "title": "저장하고 따라하기",
+          "sub": ""
+        }
+      ],
+      "caption": "자동화가 실패했을 때 로그가 없으면 추측밖에 못 합니다.\n\nprint 대신 logging을 쓰면 시각이 자동으로 붙습니다.\n남길 건 세 개면 충분해요. 시작 시각, 처리 결과, 에러 전문.\n에러는 메시지만 자르지 말고 traceback 전체를 남기세요.\n\n저장해두고 사고 나기 전에 적용하세요.",
+      "badge": "DAY 24 / 30",
+      "axis": "자동화",
+      "carousel": false
+    },
+    {
+      "day": 38,
+      "date": "2026-11-13",
+      "weekday": "금",
+      "publish_at": "2026-11-13T20:00:00+09:00",
+      "week": 4,
+      "week_theme": "기술스택",
       "pillar": "교육",
       "content_type": "A/B변형",
       "tier": "reel15",
@@ -2459,7 +2360,7 @@
       "hook_type": "H3",
       "loop_type": "cta_end",
       "cover_scene": 1,
-      "bgm": "minimal_pulse_03",
+      "bgm": "warm_acoustic_04",
       "hashtag_set": "A",
       "scenes": [
         {
@@ -2533,7 +2434,381 @@
         }
       ],
       "caption": "같은 AI인데 결과가 다른 이유는 프롬프트의 3칸 때문입니다.\n\n조건: 무엇을 원하는지.\n예시: 원하는 결과 하나.\n형식: 표인지 목록인지 코드인지.\n이 세 칸만 채워도 같은 AI에서 결과가 달라집니다.\n\n저장해두고 다음 질문에 써보세요.",
-      "badge": "DAY 29 / 30"
+      "badge": "DAY 25 / 30",
+      "axis": "기술스택",
+      "carousel": false
+    },
+    {
+      "day": 48,
+      "date": "2026-11-14",
+      "weekday": "토",
+      "publish_at": "2026-11-14T20:00:00+09:00",
+      "week": 4,
+      "week_theme": "트렌드",
+      "pillar": "교육",
+      "content_type": "본편",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "오픈소스 모델 vs API 선택 기준",
+      "hook_type": "H3",
+      "loop_type": "cta_end",
+      "cover_scene": 1,
+      "bgm": "upbeat_lofi_02",
+      "hashtag_set": "A",
+      "scenes": [
+        {
+          "t": [
+            0,
+            1
+          ],
+          "layout": "hook",
+          "title": "선택",
+          "sub": ""
+        },
+        {
+          "t": [
+            1,
+            3
+          ],
+          "layout": "hook",
+          "title": "오픈소스 모델?",
+          "sub": "API?"
+        },
+        {
+          "t": [
+            3,
+            6
+          ],
+          "layout": "point",
+          "title": "API가 맞는 경우",
+          "sub": "빨리 시작해야 할 때",
+          "num": "01",
+          "icon": "file"
+        },
+        {
+          "t": [
+            6,
+            9
+          ],
+          "layout": "point",
+          "title": "오픈소스가 맞는 경우",
+          "sub": "데이터를 밖에 못 보낼 때",
+          "num": "02",
+          "icon": "checklist"
+        },
+        {
+          "t": [
+            9,
+            12
+          ],
+          "layout": "point",
+          "title": "섞어 쓰기",
+          "sub": "쉬운 건 로컬로",
+          "num": "03",
+          "icon": "link"
+        },
+        {
+          "t": [
+            12,
+            14
+          ],
+          "layout": "compare",
+          "title": "❌ 유행 따라 선택",
+          "sub": "✅ 제약 따라 선택"
+        },
+        {
+          "t": [
+            14,
+            15
+          ],
+          "layout": "cta",
+          "title": "저장하고 따라하기",
+          "sub": ""
+        }
+      ],
+      "caption": "오픈소스냐 API냐, 정답은 내 제약에 있습니다.\n\n빨리 시작해야 하면 API가 편합니다.\n데이터를 밖으로 보낼 수 없다면 오픈소스를 로컬이나 내부 서버에 올려야 해요.\n쉬운 작업은 로컬, 어려운 작업은 API로 나눠 쓰는 방법도 있습니다.\n\n저장해두고 도입 회의 때 써보세요.",
+      "badge": "DAY 26 / 30",
+      "axis": "트렌드",
+      "carousel": false
+    },
+    {
+      "day": 57,
+      "date": "2026-11-15",
+      "weekday": "일",
+      "publish_at": "2026-11-15T20:00:00+09:00",
+      "week": 4,
+      "week_theme": "자동화",
+      "pillar": "교육",
+      "content_type": "A/B변형",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "로그 3개 (훅 B)",
+      "hook_type": "H4",
+      "loop_type": "cta_end",
+      "cover_scene": 1,
+      "bgm": "minimal_pulse_03",
+      "hashtag_set": "B",
+      "scenes": [
+        {
+          "t": [
+            0,
+            1
+          ],
+          "layout": "hook",
+          "title": "로그",
+          "sub": ""
+        },
+        {
+          "t": [
+            1,
+            3
+          ],
+          "layout": "hook",
+          "title": "자동화가 멈췄는데",
+          "sub": "이유를 아시나요?"
+        },
+        {
+          "t": [
+            3,
+            6
+          ],
+          "layout": "point",
+          "title": "시작 시각",
+          "sub": "언제 돌았는지",
+          "num": "01",
+          "icon": "file"
+        },
+        {
+          "t": [
+            6,
+            9
+          ],
+          "layout": "point",
+          "title": "처리 결과",
+          "sub": "몇 건 처리했는지",
+          "num": "02",
+          "icon": "checklist"
+        },
+        {
+          "t": [
+            9,
+            12
+          ],
+          "layout": "point",
+          "title": "에러 전문",
+          "sub": "traceback 전체",
+          "num": "03",
+          "icon": "link"
+        },
+        {
+          "t": [
+            12,
+            14
+          ],
+          "layout": "compare",
+          "title": "❌ print로 확인",
+          "sub": "✅ logging으로 기록"
+        },
+        {
+          "t": [
+            14,
+            15
+          ],
+          "layout": "cta",
+          "title": "저장하고 따라하기",
+          "sub": ""
+        }
+      ],
+      "caption": "자동화가 멈췄는데 이유를 설명할 수 있나요?\n\nprint 대신 logging을 쓰면 시각이 자동으로 붙습니다.\n남길 건 세 개면 충분해요. 시작 시각, 처리 결과, 에러 전문.\n에러는 메시지만 자르지 말고 traceback 전체를 남기세요.\n\n저장해두고 사고 나기 전에 적용하세요.",
+      "badge": "DAY 27 / 30",
+      "axis": "자동화",
+      "carousel": false
+    },
+    {
+      "day": 39,
+      "date": "2026-11-16",
+      "weekday": "월",
+      "publish_at": "2026-11-16T20:00:00+09:00",
+      "week": 4,
+      "week_theme": "기술스택",
+      "pillar": "교육",
+      "content_type": "본편",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "AI API 비용 줄이는 3가지",
+      "hook_type": "H1",
+      "loop_type": "cta_end",
+      "cover_scene": 1,
+      "bgm": "calm_tech_01",
+      "hashtag_set": "A",
+      "scenes": [
+        {
+          "t": [
+            0,
+            1
+          ],
+          "layout": "hook",
+          "title": "비용",
+          "sub": ""
+        },
+        {
+          "t": [
+            1,
+            3
+          ],
+          "layout": "hook",
+          "title": "API 요금이 걱정되면",
+          "sub": "이 3개부터"
+        },
+        {
+          "t": [
+            3,
+            6
+          ],
+          "layout": "point",
+          "title": "작은 모델 먼저",
+          "sub": "쉬운 건 가볍게",
+          "num": "01",
+          "icon": "file"
+        },
+        {
+          "t": [
+            6,
+            9
+          ],
+          "layout": "point",
+          "title": "프롬프트 캐싱",
+          "sub": "반복 부분 재사용",
+          "num": "02",
+          "icon": "checklist"
+        },
+        {
+          "t": [
+            9,
+            12
+          ],
+          "layout": "point",
+          "title": "출력 길이 제한",
+          "sub": "max tokens 설정",
+          "num": "03",
+          "icon": "link"
+        },
+        {
+          "t": [
+            12,
+            14
+          ],
+          "layout": "compare",
+          "title": "❌ 매번 큰 모델",
+          "sub": "✅ 일 따라 모델 선택"
+        },
+        {
+          "t": [
+            14,
+            15
+          ],
+          "layout": "cta",
+          "title": "저장하고 따라하기",
+          "sub": ""
+        }
+      ],
+      "caption": "API 요금, 줄이는 방법은 생각보다 단순합니다.\n\n쉬운 작업은 작은 모델에 맡기세요.\n매번 똑같이 들어가는 앞부분은 프롬프트 캐싱으로 재사용합니다.\n출력 길이에 상한을 두면 불필요하게 길어지는 답변이 줄어요.\n\n저장해두고 이번 달 청구서와 비교해보세요.",
+      "badge": "DAY 28 / 30",
+      "axis": "기술스택",
+      "carousel": false
+    },
+    {
+      "day": 49,
+      "date": "2026-11-17",
+      "weekday": "화",
+      "publish_at": "2026-11-17T20:00:00+09:00",
+      "week": 5,
+      "week_theme": "트렌드",
+      "pillar": "교육",
+      "content_type": "본편",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "AI 도입 우선순위 정하기",
+      "hook_type": "H4",
+      "loop_type": "cta_end",
+      "cover_scene": 1,
+      "bgm": "minimal_pulse_03",
+      "hashtag_set": "A",
+      "scenes": [
+        {
+          "t": [
+            0,
+            1
+          ],
+          "layout": "hook",
+          "title": "1순위",
+          "sub": ""
+        },
+        {
+          "t": [
+            1,
+            3
+          ],
+          "layout": "hook",
+          "title": "AI 도입",
+          "sub": "뭐부터 할까요?"
+        },
+        {
+          "t": [
+            3,
+            6
+          ],
+          "layout": "point",
+          "title": "반복 빈도",
+          "sub": "매일 하는 일",
+          "num": "01",
+          "icon": "file"
+        },
+        {
+          "t": [
+            6,
+            9
+          ],
+          "layout": "point",
+          "title": "규칙 명확도",
+          "sub": "기준이 뚜렷한 일",
+          "num": "02",
+          "icon": "checklist"
+        },
+        {
+          "t": [
+            9,
+            12
+          ],
+          "layout": "point",
+          "title": "실패 비용",
+          "sub": "틀려도 괜찮은 일",
+          "num": "03",
+          "icon": "link"
+        },
+        {
+          "t": [
+            12,
+            14
+          ],
+          "layout": "compare",
+          "title": "❌ 어려운 것부터",
+          "sub": "✅ 쉬운 것부터"
+        },
+        {
+          "t": [
+            14,
+            15
+          ],
+          "layout": "cta",
+          "title": "저장하고 따라하기",
+          "sub": ""
+        }
+      ],
+      "caption": "AI 도입은 쉬운 일부터 시작해야 오래 갑니다.\n\n첫째, 매일 반복되는 일을 고르세요.\n둘째, 규칙이 뚜렷한 일이 자동화가 잘 됩니다.\n셋째, 틀려도 피해가 작은 일부터 맡겨보세요.\n\n저장해두고 내 업무에 대입해보세요.",
+      "badge": "DAY 29 / 30",
+      "axis": "트렌드",
+      "carousel": false
     },
     {
       "day": 58,
@@ -2541,69 +2816,92 @@
       "weekday": "수",
       "publish_at": "2026-11-18T20:00:00+09:00",
       "week": 5,
-      "week_theme": "프롬프트·결산",
-      "pillar": "사례",
-      "content_type": "결산",
-      "tier": "info",
-      "duration_sec": 24,
-      "topic": "30일 결산 + 다음 30일 예고",
-      "hook_type": "H5",
+      "week_theme": "자동화",
+      "pillar": "교육",
+      "content_type": "본편",
+      "tier": "reel15",
+      "duration_sec": 15,
+      "topic": "주간 리포트 자동으로 받기",
+      "hook_type": "H4",
       "loop_type": "cta_end",
-      "cover_scene": 0,
+      "cover_scene": 1,
       "bgm": "warm_acoustic_04",
-      "hashtag_set": "C",
+      "hashtag_set": "B",
       "scenes": [
         {
           "t": [
             0,
+            1
+          ],
+          "layout": "hook",
+          "title": "주간",
+          "sub": ""
+        },
+        {
+          "t": [
+            1,
             3
           ],
           "layout": "hook",
-          "title": "30일째",
-          "sub": "오늘이 마지막입니다"
+          "title": "주간 리포트",
+          "sub": "자동으로 받기"
         },
         {
           "t": [
             3,
-            8
+            6
           ],
           "layout": "point",
-          "title": "배운 것",
-          "sub": "에이전트 · RAG",
-          "num": "01"
+          "title": "데이터 모으기",
+          "sub": "시트 · 메일 · 로그",
+          "num": "01",
+          "icon": "file"
         },
         {
           "t": [
-            8,
-            13
+            6,
+            9
           ],
           "layout": "point",
-          "title": "만든 것",
-          "sub": "n8n 자동화 챌린지",
-          "num": "02"
+          "title": "AI가 요약",
+          "sub": "핵심 3줄로 정리",
+          "num": "02",
+          "icon": "checklist"
         },
         {
           "t": [
-            13,
-            18
+            9,
+            12
           ],
           "layout": "point",
-          "title": "남은 것",
-          "sub": "저장한 팁이 자산",
-          "num": "03"
+          "title": "매주 월요일 발송",
+          "sub": "스케줄 트리거",
+          "num": "03",
+          "icon": "link"
         },
         {
           "t": [
-            18,
-            24
+            12,
+            14
+          ],
+          "layout": "compare",
+          "title": "❌ 직접 취합하기",
+          "sub": "✅ 자동으로 받기"
+        },
+        {
+          "t": [
+            14,
+            15
           ],
           "layout": "cta",
-          "title": "다음 30일도 갑니다",
-          "sub": "팔로우하고 보세요"
+          "title": "저장하고 따라하기",
+          "sub": ""
         }
       ],
-      "caption": "30일 동안 에이전트, RAG, n8n 자동화, 운영 팁을 정리했습니다.\n\n가장 반응이 좋았던 주제는 댓글로 알려주세요.\n다음 30일도 이어갑니다.\n\n팔로우하고 놓치지 마세요.",
-      "badge": "DAY 30 / 30"
+      "caption": "주간 리포트, 매주 직접 취합하고 계신가요?\n\n시트, 메일, 로그에서 데이터를 모읍니다.\nAI가 핵심 세 줄로 요약하고, 매주 월요일 아침에 자동 발송해요.\n취합하는 시간이 사라지면 해석하는 시간이 생깁니다.\n\n저장해두고 이번 주에 만들어보세요.",
+      "badge": "DAY 30 / 30",
+      "axis": "자동화",
+      "carousel": false
     }
   ]
 }
