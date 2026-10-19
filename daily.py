@@ -213,7 +213,7 @@ def _render_scene_pngs(scenes, tpl_path, width, height, badge, outdir, prefix):
 
 def render_scenes(post, outdir):
     tpl_path = TEMPLATES.get(post.get("theme", "dark"), TEMPLATES["dark"])
-    paths = _render_scene_pngs(post["scenes"], tpl_path, W, H, f"DAY {post['day']} / 30", outdir, "s")
+    paths = _render_scene_pngs(post["scenes"], tpl_path, W, H, post.get("badge") or f"DAY {post['day']} / 30", outdir, "s")
     log(f"장면 {len(paths)}장 렌더 완료")
     return paths
 
@@ -221,7 +221,7 @@ def render_scenes(post, outdir):
 def render_carousel(post, outdir):
     """같은 날의 scenes를 카드뉴스(4:5, 피드 캐러셀)용으로 다시 캡처한다.
     별도 콘텐츠를 새로 쓰지 않고 릴스와 같은 scenes를 재사용 — 콘텐츠 이중 관리를 피한다."""
-    paths = _render_scene_pngs(post["scenes"], CAROUSEL_TEMPLATE, CW, CH, f"DAY {post['day']} / 30", outdir, "c")
+    paths = _render_scene_pngs(post["scenes"], CAROUSEL_TEMPLATE, CW, CH, post.get("badge") or f"DAY {post['day']} / 30", outdir, "c")
     log(f"카드뉴스 {len(paths)}장 렌더 완료")
     return paths
 
