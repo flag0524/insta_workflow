@@ -1,12 +1,12 @@
 name: 인스타 릴스 자동 게시
 
-# 로컬 Windows 작업 스케줄러(07:15/09:45/20:15 KST)를 대체한다.
+# 매일 20:00 KST 게시 목표. 20:20/20:40 재시도, 다음날 07:15 누락 복구.
+# GitHub 예약 실행은 지연될 수 있으며 state.json으로 중복 게시를 방지한다.
 # GitHub Actions cron은 UTC 기준이라 KST-9시간으로 환산했다.
 on:
   schedule:
-    - cron: "15 22 * * *"   # 07:15 KST (전날 22:15 UTC)
-    - cron: "45 0 * * *"    # 09:45 KST
-    - cron: "15 11 * * *"   # 20:15 KST
+    - cron: "0,20,40 11 * * *"  # 20:00 / 20:20 / 20:40 KST
+    - cron: "15 22 * * *"       # 다음날 07:15 KST 누락 복구
   workflow_dispatch:        # Actions 탭에서 수동 실행 (테스트용)
     inputs:
       day:
