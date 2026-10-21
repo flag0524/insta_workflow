@@ -297,8 +297,15 @@ def build_video(post, pngs, outdir):
 # ---------- 4. 캡션 ----------
 
 def build_caption(plan, post):
+    # 게시물 주제에 맞는 5개 태그를 우선 사용한다. 기존 플랜은 5개로 제한해 호환한다.
     tags = plan["hashtag_sets"][post["hashtag_set"]]
-    line = " ".join(tags["large"] + tags["medium"] + tags["small"] + tags["brand"])
+    selected = post.get("hashtags")
+    if selected is None:
+        selected = tags["small"][:2] + tags["medium"][:2] + tags["brand"][:1]
+    selected = list(dict.fromkeys(selected))[:5]
+    if len(selected) != 5 or any(not t.startswith("#") for t in selected):
+        raise ValueError(f"day{post['day']} 해시태그는 서로 다른 5개가 필요합니다")
+    line = " ".join(selected)
     caption = f"{post['caption']}\n\n.\n.\n.\n{line}"
     if len(caption) > 2200:
         raise ValueError(f"day{post['day']} 캡션 {len(caption)}자 > 2200자")
