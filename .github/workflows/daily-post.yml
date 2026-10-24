@@ -1,64 +1,62 @@
-name: 인스타 릴스 자동 게시
+name: 인스타 엑셀 30일 자동 게시
 
-# 매일 20:00 KST 게시 목표. 20:20/20:40 재시도, 다음날 07:15 누락 복구.
-# GitHub 예약 실행은 지연될 수 있으며 state.json으로 중복 게시를 방지한다.
-# GitHub Actions cron은 UTC 기준이라 KST-9시간으로 환산했다.
+# KST 20:00 target + same-evening retries. Next-day 07:15 recovery.
+# GitHub cron may run late; exact punctual publication is not guaranteed.
 on:
   schedule:
-    - cron: "0,20,40 11 * * *"  # 20:00 / 20:20 / 20:40 KST
-    - cron: "15 22 * * *"       # 다음날 07:15 KST 누락 복구
-  workflow_dispatch:        # Actions 탭에서 수동 실행 (테스트용)
+    - cron: "0,20,40 11 * * *"
+    - cron: "15 22 * * *"
+  workflow_dispatch:
     inputs:
       day:
-        description: "특정 day를 강제 실행 (비우면 오늘 예정분 자동 선택)"
+        description: "새 계획 DAY 1~30 (비우면 예정분 선택)"
         required: false
       dry_run:
-        description: "true면 렌더까지만 하고 실제 게시는 하지 않음"
+        description: "미리보기만 생성하고 게시·호스팅 업로드하지 않음"
+        type: boolean
         required: false
-        default: "false"
+        default: true
 
-# 밀린 트리거 두 개가 겹쳐도(예: 러너 지연) state.json을 동시에 건드리지 않도록 직렬화한다.
-# 로컬 daily.lock과 같은 목적이지만 워크플로우 실행 단위로 막는 편이 더 확실하다.
 concurrency:
   group: daily-post
   cancel-in-progress: false
-
 permissions:
-  contents: write   # 게시 이력(state.json)을 워크플로우가 직접 커밋·푸시하기 위해 필요
+  contents: write
 
 jobs:
   post:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
-      - name: ffmpeg 확인 (ubuntu-latest엔 보통 이미 있음)
-        run: ffmpeg -version || (sudo apt-get update && sudo apt-get install -y ffmpeg)
-
-      - name: 파이썬 의존성 설치
-        run: pip install -r requirements.txt
-
-      - name: BGM 생성 (라이선스 파일이 아니라 합성음 — 매 실행마다 재생성)
-        run: python make_bgm.py
-
-      - name: 환경 점검 (시크릿 미설정 시 여기서 바로 실패)
-        env:
-          IG_USER_ID: ${{ secrets.IG_USER_ID }}
-          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
-          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
-          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
-          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
-        run: python daily.py --check-env
-
-      - name: Playwright Chromium 설치
+          cache: pip
+      - name: ffmpeg·한국어 글꼴 준비 (최대 4분)
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          if ! command -v ffmpeg >/dev/null || [ ! -f /usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc ]; then
+            timeout 90s sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 update
+            timeout 120s sudo env DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 install -y ffmpeg fonts-noto-cjk
+          fi
+          ffmpeg -version
+      - name: Python 의존성 설치
+        timeout-minutes: 3
+        run: pip install --disable-pip-version-check --timeout 30 -r requirements.txt
+      - name: 실제 시연 자료 확인·안전 압축 해제
+        run: python unpack_verified.py
+      - name: 계획·일정·검증 게이트 테스트
+        run: |
+          python plan_publish.py --validate-only
+          python plan_publish.py --readiness
+          python -m unittest discover -s . -p test_plan_publish.py -v
+          python -m unittest discover -s . -p test_verified_media.py -v
+      - name: Chromium 설치
+        timeout-minutes: 4
         run: playwright install --with-deps chromium
-
-      - name: 오늘자(또는 밀린) 게시 실행
+      - name: 계정 확인 및 해당 형식 한 편 실행
         env:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
@@ -67,23 +65,29 @@ jobs:
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          # workflow_dispatch 입력값은 스크립트 텍스트에 직접 끼워 넣지 않고
-          # 환경변수로만 전달한다. ${{ }}는 셸이 파싱하기 전에 문자 그대로
-          # 치환되므로, 입력값에 셸 메타문자가 있으면 같은 job의 시크릿에
-          # 접근하는 임의 명령 실행으로 이어질 수 있다(스크립트 인젝션).
           INPUT_DAY: ${{ github.event.inputs.day }}
           INPUT_DRY_RUN: ${{ github.event.inputs.dry_run }}
         run: |
+          set -euo pipefail
           ARGS=()
           if [ -n "$INPUT_DAY" ]; then ARGS+=(--day "$INPUT_DAY"); fi
           if [ "$INPUT_DRY_RUN" = "true" ]; then ARGS+=(--dry-run); fi
-          python daily.py "${ARGS[@]}"
-
-      - name: 게시 이력 커밋
+          python plan_publish.py "${ARGS[@]}"
+      - name: 미리보기·렌더 결과 보관
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: instagram-preview-${{ github.run_number }}
+          path: out/
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: 게시·보류 이력 보존
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add state.json
-          git diff --cached --quiet || git commit -m "chore: 게시 이력 갱신"
-          git push
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: 엑셀 계획 게시·보류 이력 갱신"
+            git push
+          fi
