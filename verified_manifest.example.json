@@ -1,0 +1,19 @@
+{
+  "approved": false,
+  "evidence_type": "actual_tool_capture",
+  "verified_by": "REPLACE_AFTER_REAL_REVIEW",
+  "verified_at": "2026-10-25T18:00:00+09:00",
+  "capture_date": "2026-10-25",
+  "tool_model": "RECORD_ACTUAL_TOOL_MODEL_AND_PLAN",
+  "hook": "검증한 실제 시연의 첫 문장",
+  "narration": "실제 실행 결과를 확인한 뒤 작성한 한국어 대본만 넣으세요.",
+  "caption": "검증한 결과·실험 조건·한계를 반영한 게시 설명만 넣으세요. 해시태그는 계획의 5개가 자동 추가됩니다.",
+  "actual_results": "확인한 실제 결과와 원문 대조 내용을 기록하세요.",
+  "assets": [
+    {
+      "file": "actual_capture.png",
+      "sha256": "REPLACE_WITH_ACTUAL_FILE_SHA256",
+      "duration_sec": 5
+    }
+  ]
+}
