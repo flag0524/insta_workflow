@@ -187,5 +187,12 @@
       "format": "carousel"
     }
   },
-  "pending_manual": {}
+  "pending_manual": {},
+  "blocked": {
+    "20261027-reel": {
+      "date": "2026-10-28",
+      "reason": "Reviewed manifest missing or unreadable",
+      "topic": "보고서 한 장으로 PPT 5장, 수정할 곳 찾아봤습니다"
+    }
+  }
 }
