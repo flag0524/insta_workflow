@@ -200,6 +200,11 @@
       "date": "2026-10-28",
       "reason": "Reviewed manifest missing or unreadable",
       "topic": "보고서 한 장으로 PPT 5장, 수정할 곳 찾아봤습니다"
+    },
+    "20261029-reel": {
+      "date": "2026-10-30",
+      "reason": "Reviewed manifest missing or unreadable",
+      "topic": "AI 회의록, 숫자와 날짜는 정말 맞았을까?"
     }
   }
 }
