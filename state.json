@@ -231,6 +231,11 @@
       "date": "2026-11-03",
       "reason": "Reviewed manifest missing or unreadable",
       "topic": "민원 문서, AI에 넣기 전 무엇부터 지워야 할까?"
+    },
+    "20261104-reel": {
+      "date": "2026-11-05",
+      "reason": "Reviewed manifest missing or unreadable",
+      "topic": "ChatGPT·Gemini·Claude, 같은 표를 얼마나 정확히 읽을까?"
     }
   }
 }
