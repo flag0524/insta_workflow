@@ -243,6 +243,11 @@
       "date": "2026-11-05",
       "reason": "Reviewed manifest missing or unreadable",
       "topic": "ChatGPT·Gemini·Claude, 같은 표를 얼마나 정확히 읽을까?"
+    },
+    "20261106-reel": {
+      "date": "2026-11-07",
+      "reason": "Reviewed manifest missing or unreadable",
+      "topic": "병합된 한글 표, AI가 행과 열을 제대로 읽었을까?"
     }
   }
 }
