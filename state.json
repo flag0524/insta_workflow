@@ -248,6 +248,11 @@
       "date": "2026-11-07",
       "reason": "Reviewed manifest missing or unreadable",
       "topic": "병합된 한글 표, AI가 행과 열을 제대로 읽었을까?"
+    },
+    "20261108-reel": {
+      "date": "2026-11-09",
+      "reason": "Reviewed manifest missing or unreadable",
+      "topic": "AI PPT, 내보내기 후에도 표와 글꼴이 그대로일까?"
     }
   }
 }
