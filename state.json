@@ -258,6 +258,11 @@
       "date": "2026-11-11",
       "reason": "Reviewed manifest missing or unreadable",
       "topic": "회의에서 나온 제안, AI가 확정사항으로 쓰지는 않았을까?"
+    },
+    "20261112-reel": {
+      "date": "2026-11-13",
+      "reason": "Reviewed manifest missing or unreadable",
+      "topic": "MCP 연결 전후, 같은 폴더 질문에 답이 달라질까?"
     }
   }
 }
