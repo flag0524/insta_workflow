@@ -263,6 +263,11 @@
       "date": "2026-11-13",
       "reason": "Reviewed manifest missing or unreadable",
       "topic": "MCP 연결 전후, 같은 폴더 질문에 답이 달라질까?"
+    },
+    "20261116-reel": {
+      "date": "2026-11-17",
+      "reason": "Reviewed manifest missing or unreadable",
+      "topic": "무료 AI 비교, 답변 전에 확인할 사용 제한은?"
     }
   }
 }
