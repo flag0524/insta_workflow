@@ -222,7 +222,13 @@
       "format": "carousel"
     }
   },
-  "pending_manual": {},
+  "pending_manual": {
+    "20261119-carousel": {
+      "at": "2026-11-20T16:56:45.821385+09:00",
+      "topic": "공공기관 회의 후 할 일 정리: 업무·담당·기한·근거 4칸",
+      "creation_id": "17914467891664060"
+    }
+  },
   "blocked": {
     "20261027-reel": {
       "date": "2026-10-28",
