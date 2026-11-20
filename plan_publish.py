@@ -223,7 +223,8 @@ def publish_safely(legacy, post, state, media_source, cover_url, caption):
     legacy.save_state(state)
     response = requests.post(f'{legacy.GRAPH}/{ig_id}/media_publish',
         data={'creation_id': creation_id, 'access_token': token}, timeout=60)
-    response.raise_for_status()
+    if not response.ok:
+        raise RuntimeError(f'media_publish failed HTTP {response.status_code}: {response.text}')
     return response.json()['id']
 
 
