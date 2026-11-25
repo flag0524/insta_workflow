@@ -66,6 +66,15 @@ def choose_post(plan, state, now=None, force_day=None, dry_run=False):
             return post
         if is_done(post, state):
             raise ValueError('Already published; forced duplicate blocked')
+            # Backlog recovery (approved 2026-11-25): a past-due reel whose
+        # reviewed verified-evidence package passes inspection may be
+        # force-published outside the original schedule window.
+        if dt.date.fromisoformat(post['date']) < today and post['format'] == 'reel':
+            try:
+                inspect_verified(post, ROOT)
+                return post
+            except VerificationPending:
+                pass
         pdate = dt.date.fromisoformat(post['date'])
         due = dt.datetime.fromisoformat(post['publish_at'])
         recovery = (pdate == today - dt.timedelta(days=1) and dt.time(7, 15) <= now.time() < dt.time(20))
