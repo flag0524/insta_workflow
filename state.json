@@ -199,6 +199,13 @@
       "topic": "민원 문서, AI에 넣기 전 무엇부터 지워야 할까?",
       "date": "2026-11-02",
       "format": "reel"
+    },
+    "20261104-reel": {
+      "at": "2026-11-25T15:33:22.071793+09:00",
+      "media_id": "18129268754490495",
+      "topic": "ChatGPT·Gemini·Claude, 같은 표를 얼마나 정확히 읽을까?",
+      "date": "2026-11-04",
+      "format": "reel"
     }
   },
   "published_carousel": {
@@ -273,11 +280,6 @@
   },
   "pending_manual": {},
   "blocked": {
-    "20261104-reel": {
-      "date": "2026-11-05",
-      "reason": "Reviewed manifest missing or unreadable",
-      "topic": "ChatGPT·Gemini·Claude, 같은 표를 얼마나 정확히 읽을까?"
-    },
     "20261106-reel": {
       "date": "2026-11-07",
       "reason": "Reviewed manifest missing or unreadable",
