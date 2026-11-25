@@ -192,6 +192,13 @@
       "topic": "AI 회의록, 숫자와 날짜는 정말 맞았을까?",
       "date": "2026-10-29",
       "format": "reel"
+    },
+    "20261102-reel": {
+      "at": "2026-11-25T15:26:00.475059+09:00",
+      "media_id": "18170489371486336",
+      "topic": "민원 문서, AI에 넣기 전 무엇부터 지워야 할까?",
+      "date": "2026-11-02",
+      "format": "reel"
     }
   },
   "published_carousel": {
@@ -266,11 +273,6 @@
   },
   "pending_manual": {},
   "blocked": {
-    "20261102-reel": {
-      "date": "2026-11-03",
-      "reason": "Reviewed manifest missing or unreadable",
-      "topic": "민원 문서, AI에 넣기 전 무엇부터 지워야 할까?"
-    },
     "20261104-reel": {
       "date": "2026-11-05",
       "reason": "Reviewed manifest missing or unreadable",
