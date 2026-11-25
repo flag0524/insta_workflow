@@ -248,6 +248,13 @@
       "topic": "같은 PDF인데 왜 다르게 읽힐까? 텍스트와 스캔본 비교",
       "date": "2026-11-18",
       "format": "reel"
+    },
+    "20261120-reel": {
+      "at": "2026-11-25T16:16:28.230330+09:00",
+      "media_id": "18027163478715632",
+      "topic": "AI 발표자료의 멋진 숫자, 원문에 정말 있었을까?",
+      "date": "2026-11-20",
+      "format": "reel"
     }
   },
   "published_carousel": {
@@ -326,11 +333,6 @@
       "date": "2026-11-13",
       "reason": "Reviewed manifest missing or unreadable",
       "topic": "MCP 연결 전후, 같은 폴더 질문에 답이 달라질까?"
-    },
-    "20261120-reel": {
-      "date": "2026-11-21",
-      "reason": "Reviewed manifest missing or unreadable",
-      "topic": "AI 발표자료의 멋진 숫자, 원문에 정말 있었을까?"
     }
   }
 }
