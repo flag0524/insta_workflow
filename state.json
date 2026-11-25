@@ -206,6 +206,13 @@
       "topic": "ChatGPT·Gemini·Claude, 같은 표를 얼마나 정확히 읽을까?",
       "date": "2026-11-04",
       "format": "reel"
+    },
+    "20261106-reel": {
+      "at": "2026-11-25T15:39:46.262639+09:00",
+      "media_id": "18041827034894308",
+      "topic": "병합된 한글 표, AI가 행과 열을 제대로 읽었을까?",
+      "date": "2026-11-06",
+      "format": "reel"
     }
   },
   "published_carousel": {
@@ -280,11 +287,6 @@
   },
   "pending_manual": {},
   "blocked": {
-    "20261106-reel": {
-      "date": "2026-11-07",
-      "reason": "Reviewed manifest missing or unreadable",
-      "topic": "병합된 한글 표, AI가 행과 열을 제대로 읽었을까?"
-    },
     "20261108-reel": {
       "date": "2026-11-09",
       "reason": "Reviewed manifest missing or unreadable",
