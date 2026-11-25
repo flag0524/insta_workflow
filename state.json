@@ -178,6 +178,13 @@
       "topic": "회의록에서 할 일을 뽑았더니, 없는 마감일까지 생겼을까?",
       "date": "2026-11-22",
       "format": "reel"
+    },
+    "20261027-reel": {
+      "at": "2026-11-25T15:09:58.960995+09:00",
+      "media_id": "17976863145156241",
+      "topic": "보고서 한 장으로 PPT 5장, 수정할 곳 찾아봤습니다",
+      "date": "2026-10-27",
+      "format": "reel"
     }
   },
   "published_carousel": {
@@ -252,11 +259,6 @@
   },
   "pending_manual": {},
   "blocked": {
-    "20261027-reel": {
-      "date": "2026-10-28",
-      "reason": "Reviewed manifest missing or unreadable",
-      "topic": "보고서 한 장으로 PPT 5장, 수정할 곳 찾아봤습니다"
-    },
     "20261029-reel": {
       "date": "2026-10-30",
       "reason": "Reviewed manifest missing or unreadable",
