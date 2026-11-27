@@ -333,6 +333,11 @@
       "date": "2026-11-13",
       "reason": "Reviewed manifest missing or unreadable",
       "topic": "MCP 연결 전후, 같은 폴더 질문에 답이 달라질까?"
+    },
+    "20261126-reel": {
+      "date": "2026-11-27",
+      "reason": "Reviewed manifest missing or unreadable",
+      "topic": "개발팀 없이 현업이 직접 만든 AI 자동화 루틴 3가지"
     }
   }
 }
