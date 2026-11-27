@@ -9,7 +9,7 @@ from verified_media import VerificationPending, inspect_verified, build_verified
 
 ROOT = Path(__file__).resolve().parent
 KST = dt.timezone(dt.timedelta(hours=9))
-PLAN = ROOT / 'content_plan_20261025.json'
+PLAN = ROOT / 'content_plan_20261125.json'
 
 
 def state_bucket(post):
