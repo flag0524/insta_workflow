@@ -33,13 +33,13 @@ jobs:
         with:
           python-version: "3.11"
           cache: pip
-      - name: ffmpeg·한국어 글꼴 준비 (최대 4분)
-        timeout-minutes: 4
+      - name: ffmpeg·한국어 글꼴 준비 (최대 8분)
+        timeout-minutes: 8
         run: |
           set -euo pipefail
           if ! command -v ffmpeg >/dev/null || [ ! -f /usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc ]; then
-            timeout 90s sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 update
-            timeout 120s sudo env DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 install -y ffmpeg fonts-noto-cjk
+            timeout 180s sudo apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=30 update
+            timeout 300s sudo env DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=30 install -y ffmpeg fonts-noto-cjk
           fi
           ffmpeg -version
       - name: Python 의존성 설치
